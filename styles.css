@@ -280,40 +280,324 @@ body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-/* Responsive Design */
+/* Mobile-First Responsive Design */
 @media (max-width: 768px) {
     .container {
-        padding: 15px;
+        padding: 10px;
     }
     
     .header h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
     }
     
     .controls {
         flex-direction: column;
         align-items: stretch;
+        padding: 20px;
+        gap: 15px;
     }
     
     .search-container {
         min-width: auto;
+        order: 1;
     }
     
     .filter-container {
-        justify-content: center;
+        justify-content: space-between;
+        order: 2;
+        gap: 10px;
+    }
+    
+    .filter-select {
+        flex: 1;
+        min-width: 100px;
+        font-size: 14px;
+        padding: 10px 12px;
     }
     
     .paper-grid {
         grid-template-columns: 1fr;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+    
+    .paper-card {
+        padding: 15px;
+        margin-bottom: 0;
+    }
+    
+    .paper-name {
+        font-size: 1.1rem;
+    }
+    
+    .paper-details {
+        gap: 4px;
+        margin-bottom: 12px;
+    }
+    
+    .detail-item {
+        padding: 3px 0;
+    }
+    
+    .detail-label {
+        font-size: 0.85rem;
+    }
+    
+    .detail-value {
+        font-size: 0.9rem;
+    }
+    
+    .cross-side {
+        padding: 10px;
+        margin-top: 8px;
+    }
+    
+    .cross-side-label {
+        font-size: 0.8rem;
+    }
+    
+    .cross-side-value {
+        font-size: 1rem;
+    }
+    
+    .add-paper-section {
+        padding: 20px;
+    }
+    
+    .add-paper-section h3 {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
     }
     
     .form-row {
         flex-direction: column;
+        gap: 12px;
     }
     
     .form-row input,
     .form-row select {
         min-width: auto;
+        font-size: 16px; /* Prevents zoom on iOS */
+        padding: 12px 15px;
+    }
+    
+    .add-btn {
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 16px;
+    }
+    
+    .paper-actions {
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 12px;
+    }
+    
+    .paper-actions button {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+    }
+    
+    .adjustment-group {
+        min-width: auto;
+    }
+    
+    .adjustment-inputs {
+        gap: 6px;
+    }
+    
+    .adjustment-inputs input {
+        font-size: 14px;
+        padding: 8px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 8px;
+    }
+    
+    .header h1 {
+        font-size: 1.6rem;
+    }
+    
+    .subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .controls {
+        padding: 15px;
+    }
+    
+    .paper-card {
+        padding: 12px;
+    }
+    
+    .add-paper-section {
+        padding: 15px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 10px;
+    }
+    
+    .modal-header, .modal-body, .modal-footer {
+        padding: 15px;
+    }
+    
+    .adjustment-group {
+        min-width: auto;
+    }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+    .paper-card:hover {
+        transform: none;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .add-btn:hover {
+        transform: none;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+    
+    .clear-btn:hover {
+        background: none;
+        color: #999;
+    }
+    
+    .clear-btn:active {
+        background: #f5f5f5;
+        color: #666;
+    }
+    
+    .paper-actions button:hover {
+        transform: none;
+    }
+    
+    .paper-actions button:active {
+        transform: scale(0.98);
+    }
+}
+
+/* PWA Install Button */
+#installButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    z-index: 1000;
+    display: none;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+#installButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+#installButton:active {
+    transform: translateY(0);
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+    #installButton {
+        bottom: 15px;
+        right: 15px;
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+    
+    /* Improve touch targets */
+    .clear-btn {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .paper-actions button {
+        min-height: 44px; /* iOS recommended touch target */
+        touch-action: manipulation;
+    }
+    
+    .add-btn {
+        min-height: 48px;
+        touch-action: manipulation;
+    }
+    
+    .filter-select {
+        min-height: 44px;
+        touch-action: manipulation;
+    }
+    
+    .search-input {
+        min-height: 44px;
+        touch-action: manipulation;
+    }
+    
+    /* Prevent zoom on input focus */
+    input[type="text"],
+    input[type="number"],
+    select {
+        font-size: 16px;
+    }
+}
+
+/* Safe area handling for devices with notches */
+@supports (padding: max(0px)) {
+    .container {
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
+    }
+    
+    #installButton {
+        bottom: max(20px, env(safe-area-inset-bottom));
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .paper-card {
+        background: #2d3748;
+        color: #e2e8f0;
+    }
+    
+    .paper-name {
+        color: #f7fafc;
+    }
+    
+    .detail-value {
+        color: #e2e8f0;
+    }
+    
+    .cross-adjustment-display {
+        background: #4a5568;
+        border-color: #718096;
+    }
+    
+    .adjustment-value {
+        background: #2d3748;
+        border-color: #4a5568;
+        color: #e2e8f0;
     }
 }
 
