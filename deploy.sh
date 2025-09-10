@@ -141,15 +141,15 @@ if command_exists pm2; then
         echo "ℹ️  No existing canon-viaprint-manager service found"
     fi
     
-    # Check for any other processes that might conflict on port 3000
-    echo "🔍 Checking for processes on port 3000..."
+    # Check for any other processes that might conflict on port 3000 (our app's port only)
+    echo "🔍 Checking for processes on port 3000 (our app's port)..."
     if command_exists lsof; then
         if lsof -i :3000 >/dev/null 2>&1; then
-            echo "⚠️  Port 3000 is in use. Attempting to free it..."
-            # Get process info before killing
+            echo "⚠️  Port 3000 is in use by another process"
             echo "📋 Processes using port 3000:"
             lsof -i :3000
-            # Kill processes on port 3000
+            echo "🛑 Killing processes on port 3000 to free it for our app..."
+            # Kill only processes on port 3000
             lsof -ti :3000 | xargs -r kill -9
             sleep 2
             # Verify port is free
@@ -158,10 +158,10 @@ if command_exists pm2; then
                 echo "   Run: sudo lsof -i :3000"
                 exit 1
             else
-                echo "✅ Port 3000 freed successfully"
+                echo "✅ Port 3000 freed successfully for our app"
             fi
         else
-            echo "✅ Port 3000 is available"
+            echo "✅ Port 3000 is available for our app"
         fi
     else
         echo "⚠️  lsof not available, skipping port check"
