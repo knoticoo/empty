@@ -1,21 +1,21 @@
 // Paper types data with your provided examples
 let paperTypes = [
-    { name: "MultiArt Silk", weight: 90, width: 360, height: 315, crossSide: "short", crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
-    { name: "G-Print", weight: 100, width: 445, height: 315, crossSide: "short", crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
-    { name: "G-Print", weight: 130, width: 320, height: 252, crossSide: "long", crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
-    { name: "Arctic Volume White", weight: 130, width: 320, height: 252, crossSide: "long", crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
-    { name: "Arctic Volume Ice", weight: 130, width: 320, height: 252, crossSide: "long", crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
-    { name: "G-Print", weight: 170, width: 320, height: 252, crossSide: "long", crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
-    { name: "Amber Graphic", weight: 140, width: 355, height: 252, crossSide: "short", crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
-    { name: "Amber Graphic", weight: 140, width: 355, height: 310, crossSide: "short", crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
-    { name: "Munken Premium Cream", weight: 115, width: 355, height: 310, crossSide: "short", crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
-    { name: "Munken Pure", weight: 130, width: 355, height: 310, crossSide: "short", crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
-    { name: "Amber Graphic", weight: 120, width: 320, height: 252, crossSide: "long", crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
-    { name: "Amber Graphic", weight: 100, width: 320, height: 252, crossSide: "long", crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
-    { name: "Munken Print Cream", weight: 80, width: 320, height: 252, crossSide: "long", crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
-    { name: "Magno Volume", weight: 150, width: 487, height: 320, crossSide: "short", crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
-    { name: "Munken Lynx Rough", weight: 150, width: 445, height: 315, crossSide: "short", crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
-    { name: "Munken Polar Rough", weight: 120, width: 445, height: 315, crossSide: "short", crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } }
+    { name: "MultiArt Silk", weight: 90, width: 360, height: 315, crossSide: "short", coating: "coated", printingWedges: true, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
+    { name: "G-Print", weight: 100, width: 445, height: 315, crossSide: "short", coating: "coated", printingWedges: true, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
+    { name: "G-Print", weight: 130, width: 320, height: 252, crossSide: "long", coating: "coated", printingWedges: true, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
+    { name: "Arctic Volume White", weight: 130, width: 320, height: 252, crossSide: "long", coating: "uncoated", printingWedges: false, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
+    { name: "Arctic Volume Ice", weight: 130, width: 320, height: 252, crossSide: "long", coating: "uncoated", printingWedges: false, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
+    { name: "G-Print", weight: 170, width: 320, height: 252, crossSide: "long", coating: "coated", printingWedges: true, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
+    { name: "Amber Graphic", weight: 140, width: 355, height: 252, crossSide: "short", coating: "coated", printingWedges: true, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
+    { name: "Amber Graphic", weight: 140, width: 355, height: 310, crossSide: "short", coating: "coated", printingWedges: true, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
+    { name: "Munken Premium Cream", weight: 115, width: 355, height: 310, crossSide: "short", coating: "uncoated", printingWedges: false, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
+    { name: "Munken Pure", weight: 130, width: 355, height: 310, crossSide: "short", coating: "uncoated", printingWedges: false, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
+    { name: "Amber Graphic", weight: 120, width: 320, height: 252, crossSide: "long", coating: "coated", printingWedges: true, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
+    { name: "Amber Graphic", weight: 100, width: 320, height: 252, crossSide: "long", coating: "coated", printingWedges: true, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
+    { name: "Munken Print Cream", weight: 80, width: 320, height: 252, crossSide: "long", coating: "uncoated", printingWedges: false, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
+    { name: "Magno Volume", weight: 150, width: 487, height: 320, crossSide: "short", coating: "coated", printingWedges: true, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
+    { name: "Munken Lynx Rough", weight: 150, width: 445, height: 315, crossSide: "short", coating: "uncoated", printingWedges: false, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
+    { name: "Munken Polar Rough", weight: 120, width: 445, height: 315, crossSide: "short", coating: "uncoated", printingWedges: false, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } }
 ];
 
 let filteredPapers = [...paperTypes];
@@ -75,6 +75,19 @@ function renderPaperGrid() {
                     <span class="detail-value">${(paper.width / paper.height).toFixed(2)}:1</span>
                 </div>
             </div>
+            <div class="paper-specs">
+                <span class="spec-badge coating-badge ${paper.coating}">${paper.coating}</span>
+                <span class="spec-badge">${paper.weight}gr</span>
+                <span class="spec-badge">${paper.width}×${paper.height}mm</span>
+            </div>
+            <div class="suitability-badges">
+                <span class="suitability-badge ${paper.printingWedges ? 'good' : 'not-suitable'}">
+                    ${paper.printingWedges ? 'Wedges ✓' : 'No Wedges'}
+                </span>
+                <span class="suitability-badge ${paper.nozzleReconditioning ? 'good' : 'not-suitable'}">
+                    ${paper.nozzleReconditioning ? 'Nozzle ✓' : 'No Nozzle'}
+                </span>
+            </div>
             <div class="cross-side ${paper.crossSide === 'short' ? 'grain-short' : 'grain-long'}">
                 <div class="cross-side-label">Cross Side (Grain Direction)</div>
                 <div class="cross-side-value">
@@ -102,6 +115,10 @@ function renderPaperGrid() {
                 <button onclick="toggleCrossSide('${paper.name}', ${paper.weight}, ${paper.width}, ${paper.height})" 
                         class="toggle-btn" style="flex: 1; padding: 8px 12px; border: 2px solid #667eea; background: white; color: #667eea; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.2s ease;">
                     Switch to ${paper.crossSide === 'short' ? 'Long Side' : 'Short Side'}
+                </button>
+                <button onclick="openPrintPreview('${paper.name}', ${paper.weight}, ${paper.width}, ${paper.height}, '${paper.coating}', ${paper.printingWedges}, ${paper.nozzleReconditioning})" 
+                        class="print-preview-btn">
+                    Print Preview
                 </button>
                 <button onclick="removePaper('${paper.name}', ${paper.weight}, ${paper.width}, ${paper.height})" 
                         class="remove-btn" style="padding: 8px 12px; border: 2px solid #e74c3c; background: white; color: #e74c3c; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.2s ease;">
@@ -143,31 +160,69 @@ function clearSearchInput() {
 function addNewPaper(e) {
     e.preventDefault();
     
+    // Clear previous validation errors
+    clearValidationErrors();
+    
     const name = document.getElementById('paperName').value.trim();
     const weight = parseInt(document.getElementById('paperWeight').value);
     const width = parseInt(document.getElementById('paperWidth').value);
     const height = parseInt(document.getElementById('paperHeight').value);
     const crossSide = document.getElementById('crossSide').value;
+    const coating = document.getElementById('paperCoating').value;
+    const printingWedges = document.getElementById('printingWedges').checked;
+    const nozzleReconditioning = document.getElementById('nozzleReconditioning').checked;
     const leftRight1 = parseFloat(document.getElementById('leftRight1').value) || 0.0;
     const leftRight2 = parseFloat(document.getElementById('leftRight2').value) || 0.0;
     const upDown1 = parseFloat(document.getElementById('upDown1').value) || 0.0;
     const upDown2 = parseFloat(document.getElementById('upDown2').value) || 0.0;
     
-    if (!name || !weight || !width || !height || !crossSide) {
-        alert('Please fill in all fields');
+    // Validation
+    let hasErrors = false;
+    
+    if (!name) {
+        showValidationError('paperName', 'Paper name is required');
+        hasErrors = true;
+    }
+    
+    if (!weight || weight < 1) {
+        showValidationError('paperWeight', 'Weight must be at least 1gr');
+        hasErrors = true;
+    }
+    
+    if (!width || width < 1) {
+        showValidationError('paperWidth', 'Width must be at least 1mm');
+        hasErrors = true;
+    }
+    
+    if (!height || height < 1) {
+        showValidationError('paperHeight', 'Height must be at least 1mm');
+        hasErrors = true;
+    }
+    
+    if (!crossSide) {
+        showValidationError('crossSide', 'Cross side selection is required');
+        hasErrors = true;
+    }
+    
+    if (!coating) {
+        showValidationError('paperCoating', 'Coating selection is required');
+        hasErrors = true;
+    }
+    
+    if (hasErrors) {
         return;
     }
     
-    // Check if paper already exists
-    const exists = paperTypes.some(paper => 
-        paper.name === name && 
+    // Check for duplicates with enhanced validation
+    const duplicatePapers = paperTypes.filter(paper => 
+        paper.name.toLowerCase() === name.toLowerCase() && 
         paper.weight === weight && 
         paper.width === width && 
         paper.height === height
     );
     
-    if (exists) {
-        alert('This paper type already exists');
+    if (duplicatePapers.length > 0) {
+        showDuplicateWarning(duplicatePapers[0]);
         return;
     }
     
@@ -177,6 +232,9 @@ function addNewPaper(e) {
         width,
         height,
         crossSide,
+        coating,
+        printingWedges,
+        nozzleReconditioning,
         crossAdjust: {
             short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] },
             long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }
@@ -684,4 +742,184 @@ if ('serviceWorker' in navigator) {
             window.location.reload();
         }
     });
+}
+
+// Validation helper functions
+function clearValidationErrors() {
+    const errorElements = document.querySelectorAll('.validation-error');
+    errorElements.forEach(el => el.remove());
+    
+    const inputElements = document.querySelectorAll('.input-error');
+    inputElements.forEach(el => el.classList.remove('input-error'));
+    
+    const warningElements = document.querySelectorAll('.duplicate-warning');
+    warningElements.forEach(el => el.remove());
+}
+
+function showValidationError(fieldId, message) {
+    const field = document.getElementById(fieldId);
+    field.classList.add('input-error');
+    
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'validation-error';
+    errorDiv.textContent = message;
+    
+    field.parentNode.appendChild(errorDiv);
+}
+
+function showDuplicateWarning(existingPaper) {
+    const form = document.getElementById('addPaperForm');
+    const warningDiv = document.createElement('div');
+    warningDiv.className = 'duplicate-warning';
+    warningDiv.innerHTML = `
+        <strong>⚠️ Duplicate Paper Detected!</strong><br>
+        A paper with the same name, weight, and dimensions already exists:<br>
+        <strong>${existingPaper.name}</strong> - ${existingPaper.weight}gr, ${existingPaper.width}×${existingPaper.height}mm<br>
+        <small>Please modify the specifications or use a different name.</small>
+    `;
+    
+    form.appendChild(warningDiv);
+}
+
+// Print Preview functionality
+function openPrintPreview(name, weight, width, height, coating, printingWedges, nozzleReconditioning) {
+    const modal = document.getElementById('printPreviewModal');
+    const paper = paperTypes.find(p => 
+        p.name === name && p.weight === weight && p.width === width && p.height === height
+    );
+    
+    if (!paper) return;
+    
+    // Update preview content
+    document.getElementById('previewPaperName').textContent = paper.name;
+    document.getElementById('previewPaperSpecs').textContent = 
+        `${paper.weight}gr • ${paper.width}×${paper.height}mm • ${paper.coating}`;
+    
+    const adjustments = paper.crossAdjust[paper.crossSide];
+    document.getElementById('previewAdjustments').textContent = 
+        `Cross Adjustments: L/R: ${adjustments.leftRight[0]}, ${adjustments.leftRight[1]} | U/D: ${adjustments.upDown[0]}, ${adjustments.upDown[1]}`;
+    
+    // Update preview paper styling based on coating
+    const previewPaper = document.getElementById('previewPaper');
+    previewPaper.className = `preview-paper ${coating}`;
+    
+    // Show modal
+    modal.style.display = 'block';
+    
+    // Setup modal event listeners
+    setupPrintPreviewModal();
+}
+
+function setupPrintPreviewModal() {
+    const modal = document.getElementById('printPreviewModal');
+    const closeBtn = document.querySelector('.close');
+    const closePreviewBtn = document.getElementById('closePreviewBtn');
+    const printBtn = document.getElementById('printPreviewBtn');
+    
+    // Close modal functions
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+    
+    closeBtn.onclick = closeModal;
+    closePreviewBtn.onclick = closeModal;
+    
+    // Close when clicking outside modal
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    }
+    
+    // Print functionality
+    printBtn.onclick = function() {
+        // Create a new window for printing
+        const printWindow = window.open('', '_blank');
+        const paper = getCurrentPreviewPaper();
+        
+        printWindow.document.write(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Print Preview - ${paper.name}</title>
+                <style>
+                    body { font-family: Arial, sans-serif; margin: 20px; }
+                    .print-header { text-align: center; margin-bottom: 30px; }
+                    .print-paper { 
+                        border: 2px solid #333; 
+                        margin: 20px auto; 
+                        padding: 20px; 
+                        max-width: 600px;
+                        background: #fafafa;
+                    }
+                    .print-grid { 
+                        display: grid; 
+                        grid-template-columns: repeat(3, 1fr); 
+                        gap: 10px; 
+                        margin-bottom: 20px; 
+                    }
+                    .print-cell { 
+                        border: 1px solid #ccc; 
+                        height: 60px; 
+                        display: flex; 
+                        align-items: center; 
+                        justify-content: center; 
+                        background: white;
+                    }
+                    .print-info { background: white; padding: 15px; border: 1px solid #ddd; }
+                    @media print { body { margin: 0; } }
+                </style>
+            </head>
+            <body>
+                <div class="print-header">
+                    <h1>Canon Viaprint 3200 - Print Preview</h1>
+                    <h2>${paper.name}</h2>
+                </div>
+                <div class="print-paper">
+                    <div class="print-grid">
+                        <div class="print-cell">Test Pattern</div>
+                        <div class="print-cell">Test Pattern</div>
+                        <div class="print-cell">Test Pattern</div>
+                        <div class="print-cell">Test Pattern</div>
+                        <div class="print-cell">Test Pattern</div>
+                        <div class="print-cell">Test Pattern</div>
+                        <div class="print-cell">Test Pattern</div>
+                        <div class="print-cell">Test Pattern</div>
+                        <div class="print-cell">Test Pattern</div>
+                    </div>
+                    <div class="print-info">
+                        <h3>Paper Specifications</h3>
+                        <p><strong>Name:</strong> ${paper.name}</p>
+                        <p><strong>Weight:</strong> ${paper.weight}gr</p>
+                        <p><strong>Dimensions:</strong> ${paper.width}×${paper.height}mm</p>
+                        <p><strong>Coating:</strong> ${paper.coating}</p>
+                        <p><strong>Cross Side:</strong> ${paper.crossSide === 'short' ? 'Short Side' : 'Long Side'}</p>
+                        <p><strong>Printing Wedges:</strong> ${paper.printingWedges ? 'Suitable' : 'Not Suitable'}</p>
+                        <p><strong>Nozzle Reconditioning:</strong> ${paper.nozzleReconditioning ? 'Suitable' : 'Not Suitable'}</p>
+                        <h4>Cross Adjustments (${paper.crossSide === 'short' ? 'Short Side' : 'Long Side'}):</h4>
+                        <p><strong>Left/Right:</strong> ${paper.crossAdjust[paper.crossSide].leftRight[0]}, ${paper.crossAdjust[paper.crossSide].leftRight[1]}</p>
+                        <p><strong>Up/Down:</strong> ${paper.crossAdjust[paper.crossSide].upDown[0]}, ${paper.crossAdjust[paper.crossSide].upDown[1]}</p>
+                    </div>
+                </div>
+            </body>
+            </html>
+        `);
+        
+        printWindow.document.close();
+        printWindow.print();
+    }
+}
+
+function getCurrentPreviewPaper() {
+    const name = document.getElementById('previewPaperName').textContent;
+    const specs = document.getElementById('previewPaperSpecs').textContent;
+    const parts = specs.split(' • ');
+    const weight = parseInt(parts[0].replace('gr', ''));
+    const dimensions = parts[1].replace('mm', '').split('×');
+    const width = parseInt(dimensions[0]);
+    const height = parseInt(dimensions[1]);
+    
+    return paperTypes.find(p => 
+        p.name === name && p.weight === weight && p.width === width && p.height === height
+    );
 }
