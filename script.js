@@ -1,21 +1,21 @@
 // Paper types data with your provided examples
 let paperTypes = [
-    { name: "MultiArt Silk", weight: 90, width: 360, height: 315, crossSide: "short", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
-    { name: "G-Print", weight: 100, width: 445, height: 315, crossSide: "short", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
-    { name: "G-Print", weight: 130, width: 320, height: 252, crossSide: "long", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
-    { name: "Arctic Volume White", weight: 130, width: 320, height: 252, crossSide: "long", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
-    { name: "Arctic Volume Ice", weight: 130, width: 320, height: 252, crossSide: "long", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
-    { name: "G-Print", weight: 170, width: 320, height: 252, crossSide: "long", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
-    { name: "Amber Graphic", weight: 140, width: 355, height: 252, crossSide: "short", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
-    { name: "Amber Graphic", weight: 140, width: 355, height: 310, crossSide: "short", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
-    { name: "Munken Premium Cream", weight: 115, width: 355, height: 310, crossSide: "short", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
-    { name: "Munken Pure", weight: 130, width: 355, height: 310, crossSide: "short", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
-    { name: "Amber Graphic", weight: 120, width: 320, height: 252, crossSide: "long", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
-    { name: "Amber Graphic", weight: 100, width: 320, height: 252, crossSide: "long", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
-    { name: "Munken Print Cream", weight: 80, width: 320, height: 252, crossSide: "long", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
-    { name: "Magno Volume", weight: 150, width: 487, height: 320, crossSide: "short", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
-    { name: "Munken Lynx Rough", weight: 150, width: 445, height: 315, crossSide: "short", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
-    { name: "Munken Polar Rough", weight: 120, width: 445, height: 315, crossSide: "short", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } }
+    { name: "MultiArt Silk", weight: 90, width: 360, height: 315, crossSide: "short", crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
+    { name: "G-Print", weight: 100, width: 445, height: 315, crossSide: "short", crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
+    { name: "G-Print", weight: 130, width: 320, height: 252, crossSide: "long", crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
+    { name: "Arctic Volume White", weight: 130, width: 320, height: 252, crossSide: "long", crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
+    { name: "Arctic Volume Ice", weight: 130, width: 320, height: 252, crossSide: "long", crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
+    { name: "G-Print", weight: 170, width: 320, height: 252, crossSide: "long", crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
+    { name: "Amber Graphic", weight: 140, width: 355, height: 252, crossSide: "short", crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
+    { name: "Amber Graphic", weight: 140, width: 355, height: 310, crossSide: "short", crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
+    { name: "Munken Premium Cream", weight: 115, width: 355, height: 310, crossSide: "short", crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
+    { name: "Munken Pure", weight: 130, width: 355, height: 310, crossSide: "short", crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
+    { name: "Amber Graphic", weight: 120, width: 320, height: 252, crossSide: "long", crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
+    { name: "Amber Graphic", weight: 100, width: 320, height: 252, crossSide: "long", crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
+    { name: "Munken Print Cream", weight: 80, width: 320, height: 252, crossSide: "long", crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
+    { name: "Magno Volume", weight: 150, width: 487, height: 320, crossSide: "short", crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
+    { name: "Munken Lynx Rough", weight: 150, width: 445, height: 315, crossSide: "short", crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
+    { name: "Munken Polar Rough", weight: 120, width: 445, height: 315, crossSide: "short", crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } }
 ];
 
 let filteredPapers = [...paperTypes];
@@ -79,20 +79,20 @@ function renderPaperGrid() {
                 </div>
             </div>
             <div class="cross-adjustment-display">
-                <div class="adjustment-title">Cross Adjustment:</div>
+                <div class="adjustment-title">Cross Adjustment (${paper.crossSide === 'short' ? 'Short Side' : 'Long Side'}):</div>
                 <div class="adjustment-values">
                     <div class="adjustment-row">
                         <span class="adjustment-label">Left/Right:</span>
-                        <span class="adjustment-value">${paper.crossAdjust.leftRight[0]}, ${paper.crossAdjust.leftRight[1]}</span>
+                        <span class="adjustment-value">${paper.crossAdjust[paper.crossSide].leftRight[0]}, ${paper.crossAdjust[paper.crossSide].leftRight[1]}</span>
                     </div>
                     <div class="adjustment-row">
                         <span class="adjustment-label">Up/Down:</span>
-                        <span class="adjustment-value">${paper.crossAdjust.upDown[0]}, ${paper.crossAdjust.upDown[1]}</span>
+                        <span class="adjustment-value">${paper.crossAdjust[paper.crossSide].upDown[0]}, ${paper.crossAdjust[paper.crossSide].upDown[1]}</span>
                     </div>
                 </div>
                 <button onclick="openAdjustmentModal('${paper.name}', ${paper.weight}, ${paper.width}, ${paper.height})" 
                         class="edit-adjustment-btn">
-                    Edit Adjustment
+                    Edit Adjustments
                 </button>
             </div>
             <div class="paper-actions" style="margin-top: 15px; display: flex; gap: 10px;">
@@ -121,7 +121,7 @@ function filterPapers() {
         
         const matchesWeight = !selectedWeight || paper.weight.toString() === selectedWeight;
         
-        const matchesSize = !selectedSize || `${paper.width}×${paper.height}` === selectedSize;
+        const matchesSize = !selectedSize || `${paper.width}x${paper.height}` === selectedSize;
         
         return matchesSearch && matchesWeight && matchesSize;
     });
@@ -175,9 +175,15 @@ function addNewPaper(e) {
         height,
         crossSide,
         crossAdjust: {
-            leftRight: [leftRight1, leftRight2],
-            upDown: [upDown1, upDown2]
+            short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] },
+            long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }
         }
+    };
+    
+    // Set the initial values for the selected cross side
+    newPaper.crossAdjust[crossSide] = {
+        leftRight: [leftRight1, leftRight2],
+        upDown: [upDown1, upDown2]
     };
     
     paperTypes.push(newPaper);
@@ -281,20 +287,42 @@ function openAdjustmentModal(name, weight, width, height) {
                 </div>
                 <div class="modal-body">
                     <div class="adjustment-form">
-                        <div class="adjustment-group">
-                            <label>Left/Right Adjustment:</label>
-                            <div class="adjustment-inputs">
-                                <input type="number" id="modalLeftRight1" value="${paper.crossAdjust.leftRight[0]}" step="0.1">
-                                <span>,</span>
-                                <input type="number" id="modalLeftRight2" value="${paper.crossAdjust.leftRight[1]}" step="0.1">
+                        <div class="orientation-section">
+                            <h4>Short Side Adjustments</h4>
+                            <div class="adjustment-group">
+                                <label>Left/Right Adjustment:</label>
+                                <div class="adjustment-inputs">
+                                    <input type="number" id="modalShortLeftRight1" value="${paper.crossAdjust.short.leftRight[0]}" step="0.1">
+                                    <span>,</span>
+                                    <input type="number" id="modalShortLeftRight2" value="${paper.crossAdjust.short.leftRight[1]}" step="0.1">
+                                </div>
+                            </div>
+                            <div class="adjustment-group">
+                                <label>Up/Down Adjustment:</label>
+                                <div class="adjustment-inputs">
+                                    <input type="number" id="modalShortUpDown1" value="${paper.crossAdjust.short.upDown[0]}" step="0.1">
+                                    <span>,</span>
+                                    <input type="number" id="modalShortUpDown2" value="${paper.crossAdjust.short.upDown[1]}" step="0.1">
+                                </div>
                             </div>
                         </div>
-                        <div class="adjustment-group">
-                            <label>Up/Down Adjustment:</label>
-                            <div class="adjustment-inputs">
-                                <input type="number" id="modalUpDown1" value="${paper.crossAdjust.upDown[0]}" step="0.1">
-                                <span>,</span>
-                                <input type="number" id="modalUpDown2" value="${paper.crossAdjust.upDown[1]}" step="0.1">
+                        <div class="orientation-section">
+                            <h4>Long Side Adjustments</h4>
+                            <div class="adjustment-group">
+                                <label>Left/Right Adjustment:</label>
+                                <div class="adjustment-inputs">
+                                    <input type="number" id="modalLongLeftRight1" value="${paper.crossAdjust.long.leftRight[0]}" step="0.1">
+                                    <span>,</span>
+                                    <input type="number" id="modalLongLeftRight2" value="${paper.crossAdjust.long.leftRight[1]}" step="0.1">
+                                </div>
+                            </div>
+                            <div class="adjustment-group">
+                                <label>Up/Down Adjustment:</label>
+                                <div class="adjustment-inputs">
+                                    <input type="number" id="modalLongUpDown1" value="${paper.crossAdjust.long.upDown[0]}" step="0.1">
+                                    <span>,</span>
+                                    <input type="number" id="modalLongUpDown2" value="${paper.crossAdjust.long.upDown[1]}" step="0.1">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -324,10 +352,15 @@ function closeAdjustmentModal() {
 }
 
 function saveAdjustment(name, weight, width, height) {
-    const leftRight1 = parseFloat(document.getElementById('modalLeftRight1').value) || 0.0;
-    const leftRight2 = parseFloat(document.getElementById('modalLeftRight2').value) || 0.0;
-    const upDown1 = parseFloat(document.getElementById('modalUpDown1').value) || 0.0;
-    const upDown2 = parseFloat(document.getElementById('modalUpDown2').value) || 0.0;
+    const shortLeftRight1 = parseFloat(document.getElementById('modalShortLeftRight1').value) || 0.0;
+    const shortLeftRight2 = parseFloat(document.getElementById('modalShortLeftRight2').value) || 0.0;
+    const shortUpDown1 = parseFloat(document.getElementById('modalShortUpDown1').value) || 0.0;
+    const shortUpDown2 = parseFloat(document.getElementById('modalShortUpDown2').value) || 0.0;
+    
+    const longLeftRight1 = parseFloat(document.getElementById('modalLongLeftRight1').value) || 0.0;
+    const longLeftRight2 = parseFloat(document.getElementById('modalLongLeftRight2').value) || 0.0;
+    const longUpDown1 = parseFloat(document.getElementById('modalLongUpDown1').value) || 0.0;
+    const longUpDown2 = parseFloat(document.getElementById('modalLongUpDown2').value) || 0.0;
     
     const paperIndex = paperTypes.findIndex(paper => 
         paper.name === name && 
@@ -338,13 +371,19 @@ function saveAdjustment(name, weight, width, height) {
     
     if (paperIndex !== -1) {
         paperTypes[paperIndex].crossAdjust = {
-            leftRight: [leftRight1, leftRight2],
-            upDown: [upDown1, upDown2]
+            short: {
+                leftRight: [shortLeftRight1, shortLeftRight2],
+                upDown: [shortUpDown1, shortUpDown2]
+            },
+            long: {
+                leftRight: [longLeftRight1, longLeftRight2],
+                upDown: [longUpDown1, longUpDown2]
+            }
         };
         filteredPapers = [...paperTypes];
         renderPaperGrid();
         closeAdjustmentModal();
-        showNotification('Cross adjustment saved!', 'success');
+        showNotification('Cross adjustments saved!', 'success');
     }
 }
 
