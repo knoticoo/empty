@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canon Viaprint 3200 - Paper Type Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Canon Viaprint 3200</h1>
+            <p class="subtitle">Paper Type & Cross-Side Manager</p>
+        </header>
+
+        <div class="controls">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search paper types..." class="search-input">
+                <button id="clearSearch" class="clear-btn">×</button>
+            </div>
+            <div class="filter-container">
+                <select id="weightFilter" class="filter-select">
+                    <option value="">All Weights</option>
+                    <option value="80">80gr</option>
+                    <option value="90">90gr</option>
+                    <option value="100">100gr</option>
+                    <option value="115">115gr</option>
+                    <option value="120">120gr</option>
+                    <option value="130">130gr</option>
+                    <option value="140">140gr</option>
+                    <option value="150">150gr</option>
+                    <option value="170">170gr</option>
+                </select>
+                <select id="sizeFilter" class="filter-select">
+                    <option value="">All Sizes</option>
+                    <option value="320x252">320×252</option>
+                    <option value="355x252">355×252</option>
+                    <option value="355x310">355×310</option>
+                    <option value="360x315">360×315</option>
+                    <option value="445x315">445×315</option>
+                    <option value="487x320">487×320</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="paper-grid" id="paperGrid">
+            <!-- Paper cards will be dynamically generated here -->
+        </div>
+
+        <div class="add-paper-section">
+            <h3>Add New Paper Type</h3>
+            <form id="addPaperForm" class="add-form">
+                <div class="form-row">
+                    <input type="text" id="paperName" placeholder="Paper Name (e.g., MultiArt Silk)" required>
+                    <input type="number" id="paperWeight" placeholder="Weight (gr)" min="1" required>
+                </div>
+                <div class="form-row">
+                    <input type="number" id="paperWidth" placeholder="Width (mm)" min="1" required>
+                    <input type="number" id="paperHeight" placeholder="Height (mm)" min="1" required>
+                </div>
+                <div class="form-row">
+                    <select id="crossSide" required>
+                        <option value="">Select Cross Side</option>
+                        <option value="short">Short Side (Grain Short)</option>
+                        <option value="long">Long Side (Grain Long)</option>
+                    </select>
+                    <button type="submit" class="add-btn">Add Paper</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
