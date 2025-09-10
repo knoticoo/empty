@@ -72,6 +72,25 @@
                         <option value="short">Short Side (Grain Short)</option>
                         <option value="long">Long Side (Grain Long)</option>
                     </select>
+                    <select id="paperCoating" required>
+                        <option value="">Select Coating</option>
+                        <option value="coated">Coated</option>
+                        <option value="uncoated">Uncoated</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="printingWedges">
+                            <span class="checkmark"></span>
+                            Good for Printing Wedges
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="nozzleReconditioning">
+                            <span class="checkmark"></span>
+                            Good for Nozzle Reconditioning
+                        </label>
+                    </div>
                     <button type="submit" class="add-btn">Add Paper</button>
                 </div>
                 <div class="cross-adjustment-section">
@@ -97,6 +116,42 @@
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Print Preview Modal -->
+    <div id="printPreviewModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Print Preview</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="preview-paper" id="previewPaper">
+                    <div class="preview-content">
+                        <div class="preview-grid">
+                            <div class="preview-cell"></div>
+                            <div class="preview-cell"></div>
+                            <div class="preview-cell"></div>
+                            <div class="preview-cell"></div>
+                            <div class="preview-cell"></div>
+                            <div class="preview-cell"></div>
+                            <div class="preview-cell"></div>
+                            <div class="preview-cell"></div>
+                            <div class="preview-cell"></div>
+                        </div>
+                        <div class="preview-info">
+                            <h4 id="previewPaperName">Paper Name</h4>
+                            <p id="previewPaperSpecs">Specifications</p>
+                            <p id="previewAdjustments">Cross Adjustments</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="preview-actions">
+                    <button id="printPreviewBtn" class="btn-primary">Print</button>
+                    <button id="closePreviewBtn" class="btn-secondary">Close</button>
+                </div>
+            </div>
         </div>
     </div>
 
