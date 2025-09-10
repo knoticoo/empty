@@ -62,20 +62,20 @@ function initializeDatabase() {
 // Insert default paper types
 function insertDefaultPaperTypes() {
     const defaultPapers = [
-        { name: "MultiArt Silk", weight: 90, width: 360, height: 315, crossSide: "short", coating: "krītots", printingWedges: true, nozzleReconditioning: true },
-        { name: "G-Print", weight: 100, width: 445, height: 315, crossSide: "short", coating: "krītots", printingWedges: true, nozzleReconditioning: true },
-        { name: "G-Print", weight: 130, width: 320, height: 252, crossSide: "long", coating: "krītots", printingWedges: true, nozzleReconditioning: true },
+        { name: "MultiArt Silk", weight: 90, width: 360, height: 315, crossSide: "short", coating: "Krītots", printingWedges: true, nozzleReconditioning: true },
+        { name: "G-Print", weight: 100, width: 445, height: 315, crossSide: "short", coating: "Krītots", printingWedges: true, nozzleReconditioning: true },
+        { name: "G-Print", weight: 130, width: 320, height: 252, crossSide: "long", coating: "Krītots", printingWedges: true, nozzleReconditioning: true },
         { name: "Arctic Volume White", weight: 130, width: 320, height: 252, crossSide: "long", coating: "Nekrītots", printingWedges: false, nozzleReconditioning: true },
         { name: "Arctic Volume Ice", weight: 130, width: 320, height: 252, crossSide: "long", coating: "Nekrītots", printingWedges: false, nozzleReconditioning: true },
-        { name: "G-Print", weight: 170, width: 320, height: 252, crossSide: "long", coating: "krītots", printingWedges: true, nozzleReconditioning: true },
-        { name: "Amber Graphic", weight: 140, width: 355, height: 252, crossSide: "short", coating: "krītots", printingWedges: true, nozzleReconditioning: true },
-        { name: "Amber Graphic", weight: 140, width: 355, height: 310, crossSide: "short", coating: "krītots", printingWedges: true, nozzleReconditioning: true },
+        { name: "G-Print", weight: 170, width: 320, height: 252, crossSide: "long", coating: "Krītots", printingWedges: true, nozzleReconditioning: true },
+        { name: "Amber Graphic", weight: 140, width: 355, height: 252, crossSide: "short", coating: "Krītots", printingWedges: true, nozzleReconditioning: true },
+        { name: "Amber Graphic", weight: 140, width: 355, height: 310, crossSide: "short", coating: "Krītots", printingWedges: true, nozzleReconditioning: true },
         { name: "Munken Premium Cream", weight: 115, width: 355, height: 310, crossSide: "short", coating: "Nekrītots", printingWedges: false, nozzleReconditioning: true },
         { name: "Munken Pure", weight: 130, width: 355, height: 310, crossSide: "short", coating: "Nekrītots", printingWedges: false, nozzleReconditioning: true },
-        { name: "Amber Graphic", weight: 120, width: 320, height: 252, crossSide: "long", coating: "krītots", printingWedges: true, nozzleReconditioning: true },
-        { name: "Amber Graphic", weight: 100, width: 320, height: 252, crossSide: "long", coating: "krītots", printingWedges: true, nozzleReconditioning: true },
+        { name: "Amber Graphic", weight: 120, width: 320, height: 252, crossSide: "long", coating: "Krītots", printingWedges: true, nozzleReconditioning: true },
+        { name: "Amber Graphic", weight: 100, width: 320, height: 252, crossSide: "long", coating: "Krītots", printingWedges: true, nozzleReconditioning: true },
         { name: "Munken Print Cream", weight: 80, width: 320, height: 252, crossSide: "long", coating: "Nekrītots", printingWedges: false, nozzleReconditioning: true },
-        { name: "Magno Volume", weight: 150, width: 487, height: 320, crossSide: "short", coating: "krītots", printingWedges: true, nozzleReconditioning: true },
+        { name: "Magno Volume", weight: 150, width: 487, height: 320, crossSide: "short", coating: "Krītots", printingWedges: true, nozzleReconditioning: true },
         { name: "Munken Lynx Rough", weight: 150, width: 445, height: 315, crossSide: "short", coating: "Nekrītots", printingWedges: false, nozzleReconditioning: true },
         { name: "Munken Polar Rough", weight: 120, width: 445, height: 315, crossSide: "short", coating: "Nekrītots", printingWedges: false, nozzleReconditioning: true }
     ];
