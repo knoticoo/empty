@@ -33,6 +33,20 @@ if ! command_exists npm; then
     exit 1
 fi
 
+# Check for lsof (needed for port checking)
+if ! command_exists lsof; then
+    echo "⚠️  lsof not found. Installing lsof for port checking..."
+    if command_exists apt-get; then
+        sudo apt-get update && sudo apt-get install -y lsof
+    elif command_exists yum; then
+        sudo yum install -y lsof
+    elif command_exists dnf; then
+        sudo dnf install -y lsof
+    else
+        echo "⚠️  Could not install lsof automatically. Port checking will be skipped."
+    fi
+fi
+
 echo "✅ Prerequisites check passed!"
 
 # Install dependencies
@@ -108,6 +122,52 @@ EOF
     sudo systemctl enable canon-viaprint-manager
     
     echo "✅ Systemd service created and enabled!"
+fi
+
+# Check for existing services and handle them
+echo ""
+echo "🔍 Checking for existing services..."
+
+# Check if PM2 is running and if our app exists
+if command_exists pm2; then
+    # Check if our specific app is running
+    if pm2 list | grep -q "canon-viaprint-manager"; then
+        echo "⚠️  Found existing canon-viaprint-manager service"
+        echo "🛑 Stopping existing service..."
+        pm2 stop canon-viaprint-manager
+        pm2 delete canon-viaprint-manager
+        echo "✅ Existing service stopped and removed"
+    else
+        echo "ℹ️  No existing canon-viaprint-manager service found"
+    fi
+    
+    # Check for any other processes that might conflict on port 3000
+    echo "🔍 Checking for processes on port 3000..."
+    if command_exists lsof; then
+        if lsof -i :3000 >/dev/null 2>&1; then
+            echo "⚠️  Port 3000 is in use. Attempting to free it..."
+            # Get process info before killing
+            echo "📋 Processes using port 3000:"
+            lsof -i :3000
+            # Kill processes on port 3000
+            lsof -ti :3000 | xargs -r kill -9
+            sleep 2
+            # Verify port is free
+            if lsof -i :3000 >/dev/null 2>&1; then
+                echo "❌ Failed to free port 3000. Please check manually."
+                echo "   Run: sudo lsof -i :3000"
+                exit 1
+            else
+                echo "✅ Port 3000 freed successfully"
+            fi
+        else
+            echo "✅ Port 3000 is available"
+        fi
+    else
+        echo "⚠️  lsof not available, skipping port check"
+    fi
+else
+    echo "ℹ️  PM2 not found, will install it"
 fi
 
 # Start the service
