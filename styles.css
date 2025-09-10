@@ -1029,7 +1029,13 @@ body {
     border-color: #bbdefb;
 }
 
-.coating-badge.uncoated {
+.coating-badge.Krītots {
+    background: #e8f5e8;
+    color: #2e7d32;
+    border-color: #c8e6c9;
+}
+
+.coating-badge.Nekrītots {
     background: #f3e5f5;
     color: #7b1fa2;
     border-color: #e1bee7;

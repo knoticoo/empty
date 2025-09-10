@@ -185,16 +185,16 @@ function renderPaperGrid() {
                 </div>
             </div>
             <div class="paper-specs">
-                <span class="spec-badge coating-badge ${paper.coating}">${paper.coating === 'coated' ? 'Pārklāts' : 'Nepārklāts'}</span>
+                <span class="spec-badge coating-badge ${paper.coating}">${paper.coating === 'Krītots' ? 'Krītots' : 'Nekrītots'}</span>
                 <span class="spec-badge">${paper.weight}gr</span>
                 <span class="spec-badge">${paper.width}×${paper.height}mm</span>
             </div>
             <div class="suitability-badges">
                 <span class="suitability-badge ${paper.printingWedges ? 'good' : 'not-suitable'}">
-                    ${paper.printingWedges ? 'Ķīles ✓' : 'Bez ķīlēm'}
+                    ${paper.printingWedges ? 'Wedges ✓' : 'No Wedges'}
                 </span>
                 <span class="suitability-badge ${paper.nozzleReconditioning ? 'good' : 'not-suitable'}">
-                    ${paper.nozzleReconditioning ? 'Sprauslas ✓' : 'Bez sprauslām'}
+                    ${paper.nozzleReconditioning ? 'Nozzle ✓' : 'No Nozzle'}
                 </span>
             </div>
             <div class="cross-side ${paper.crossSide === 'short' ? 'grain-short' : 'grain-long'}">
@@ -277,7 +277,8 @@ async function addNewPaper(e) {
     const width = parseInt(document.getElementById('paperWidth').value);
     const height = parseInt(document.getElementById('paperHeight').value);
     const crossSide = document.getElementById('crossSide').value;
-    const coating = document.getElementById('paperCoating').value;
+    const coatingValue = document.getElementById('paperCoating').value;
+    const coating = coatingValue === 'coated' ? 'Krītots' : 'Nekrītots';
     const printingWedges = document.getElementById('printingWedges').checked;
     const nozzleReconditioning = document.getElementById('nozzleReconditioning').checked;
     const leftRight1 = parseFloat(document.getElementById('leftRight1').value) || 0.0;
@@ -918,8 +919,8 @@ function openEditPaperModal(id) {
                                 <option value="long" ${paper.crossSide === 'long' ? 'selected' : ''}>Garā puse (Garā grauds)</option>
                             </select>
                             <select id="editPaperCoating" required>
-                                <option value="coated" ${paper.coating === 'coated' ? 'selected' : ''}>Pārklāts</option>
-                                <option value="uncoated" ${paper.coating === 'uncoated' ? 'selected' : ''}>Nepārklāts</option>
+                                <option value="coated" ${paper.coating === 'Krītots' ? 'selected' : ''}>Krītots</option>
+                                <option value="uncoated" ${paper.coating === 'Nekrītots' ? 'selected' : ''}>Nekrītots</option>
                             </select>
                         </div>
                         <div class="form-row">
@@ -968,7 +969,8 @@ async function saveEditPaper(id) {
     const width = parseInt(document.getElementById('editPaperWidth').value);
     const height = parseInt(document.getElementById('editPaperHeight').value);
     const crossSide = document.getElementById('editCrossSide').value;
-    const coating = document.getElementById('editPaperCoating').value;
+    const coatingValue = document.getElementById('editPaperCoating').value;
+    const coating = coatingValue === 'coated' ? 'Krītots' : 'Nekrītots';
     const printingWedges = document.getElementById('editPrintingWedges').checked;
     const nozzleReconditioning = document.getElementById('editNozzleReconditioning').checked;
     
