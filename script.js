@@ -1,24 +1,6 @@
-// Paper types data with your provided examples
-let paperTypes = [
-    { name: "MultiArt Silk", weight: 90, width: 360, height: 315, crossSide: "short", coating: "coated", printingWedges: true, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
-    { name: "G-Print", weight: 100, width: 445, height: 315, crossSide: "short", coating: "coated", printingWedges: true, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
-    { name: "G-Print", weight: 130, width: 320, height: 252, crossSide: "long", coating: "coated", printingWedges: true, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
-    { name: "Arctic Volume White", weight: 130, width: 320, height: 252, crossSide: "long", coating: "uncoated", printingWedges: false, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
-    { name: "Arctic Volume Ice", weight: 130, width: 320, height: 252, crossSide: "long", coating: "uncoated", printingWedges: false, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
-    { name: "G-Print", weight: 170, width: 320, height: 252, crossSide: "long", coating: "coated", printingWedges: true, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
-    { name: "Amber Graphic", weight: 140, width: 355, height: 252, crossSide: "short", coating: "coated", printingWedges: true, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
-    { name: "Amber Graphic", weight: 140, width: 355, height: 310, crossSide: "short", coating: "coated", printingWedges: true, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
-    { name: "Munken Premium Cream", weight: 115, width: 355, height: 310, crossSide: "short", coating: "uncoated", printingWedges: false, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
-    { name: "Munken Pure", weight: 130, width: 355, height: 310, crossSide: "short", coating: "uncoated", printingWedges: false, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
-    { name: "Amber Graphic", weight: 120, width: 320, height: 252, crossSide: "long", coating: "coated", printingWedges: true, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
-    { name: "Amber Graphic", weight: 100, width: 320, height: 252, crossSide: "long", coating: "coated", printingWedges: true, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
-    { name: "Munken Print Cream", weight: 80, width: 320, height: 252, crossSide: "long", coating: "uncoated", printingWedges: false, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] }, long: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] } } },
-    { name: "Magno Volume", weight: 150, width: 487, height: 320, crossSide: "short", coating: "coated", printingWedges: true, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
-    { name: "Munken Lynx Rough", weight: 150, width: 445, height: 315, crossSide: "short", coating: "uncoated", printingWedges: false, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } },
-    { name: "Munken Polar Rough", weight: 120, width: 445, height: 315, crossSide: "short", coating: "uncoated", printingWedges: false, nozzleReconditioning: true, crossAdjust: { short: { leftRight: [0.2, -0.2], upDown: [0.2, -0.2] }, long: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } } }
-];
-
-let filteredPapers = [...paperTypes];
+// Paper types data - loaded from database
+let paperTypes = [];
+let filteredPapers = [];
 
 // DOM elements
 const paperGrid = document.getElementById('paperGrid');
@@ -28,9 +10,136 @@ const weightFilter = document.getElementById('weightFilter');
 const sizeFilter = document.getElementById('sizeFilter');
 const addPaperForm = document.getElementById('addPaperForm');
 
+// API Functions
+async function loadPaperTypes() {
+    try {
+        const response = await fetch('/api/papers');
+        if (!response.ok) {
+            throw new Error('Failed to load paper types');
+        }
+        paperTypes = await response.json();
+        filteredPapers = [...paperTypes];
+        renderPaperGrid();
+    } catch (error) {
+        console.error('Error loading paper types:', error);
+        showNotification('Failed to load paper types. Using offline mode.', 'info');
+        // Fallback to empty array if API fails
+        paperTypes = [];
+        filteredPapers = [];
+        renderPaperGrid();
+    }
+}
+
+async function savePaperType(paperData) {
+    try {
+        const response = await fetch('/api/papers', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(paperData)
+        });
+        
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Failed to save paper type');
+        }
+        
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error saving paper type:', error);
+        throw error;
+    }
+}
+
+async function updatePaperType(id, paperData) {
+    try {
+        const response = await fetch(`/api/papers/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(paperData)
+        });
+        
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Failed to update paper type');
+        }
+        
+        return await response.json();
+    } catch (error) {
+        console.error('Error updating paper type:', error);
+        throw error;
+    }
+}
+
+async function updateCrossAdjustments(id, crossAdjust) {
+    try {
+        const response = await fetch(`/api/papers/${id}/adjustments`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ crossAdjust })
+        });
+        
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Failed to update adjustments');
+        }
+        
+        return await response.json();
+    } catch (error) {
+        console.error('Error updating adjustments:', error);
+        throw error;
+    }
+}
+
+async function toggleCrossSideAPI(id, crossSide) {
+    try {
+        const response = await fetch(`/api/papers/${id}/cross-side`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ crossSide })
+        });
+        
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Failed to toggle cross side');
+        }
+        
+        return await response.json();
+    } catch (error) {
+        console.error('Error toggling cross side:', error);
+        throw error;
+    }
+}
+
+async function deletePaperType(id) {
+    try {
+        const response = await fetch(`/api/papers/${id}`, {
+            method: 'DELETE'
+        });
+        
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Failed to delete paper type');
+        }
+        
+        return await response.json();
+    } catch (error) {
+        console.error('Error deleting paper type:', error);
+        throw error;
+    }
+}
+
 // Initialize the app
 document.addEventListener('DOMContentLoaded', function() {
-    renderPaperGrid();
+    loadPaperTypes();
     setupEventListeners();
     registerServiceWorker();
     setupPWAFeatures();
@@ -106,21 +215,21 @@ function renderPaperGrid() {
                         <span class="adjustment-value">${paper.crossAdjust[paper.crossSide].upDown[0]}, ${paper.crossAdjust[paper.crossSide].upDown[1]}</span>
                     </div>
                 </div>
-                <button onclick="openAdjustmentModal('${paper.name}', ${paper.weight}, ${paper.width}, ${paper.height})" 
+                <button onclick="openAdjustmentModal(${paper.id})" 
                         class="edit-adjustment-btn">
                     Edit Adjustments
                 </button>
             </div>
             <div class="paper-actions" style="margin-top: 15px; display: flex; gap: 10px;">
-                <button onclick="toggleCrossSide('${paper.name}', ${paper.weight}, ${paper.width}, ${paper.height})" 
+                <button onclick="toggleCrossSide(${paper.id})" 
                         class="toggle-btn" style="flex: 1; padding: 8px 12px; border: 2px solid #667eea; background: white; color: #667eea; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.2s ease;">
                     Switch to ${paper.crossSide === 'short' ? 'Long Side' : 'Short Side'}
                 </button>
-                <button onclick="openPrintPreview('${paper.name}', ${paper.weight}, ${paper.width}, ${paper.height}, '${paper.coating}', ${paper.printingWedges}, ${paper.nozzleReconditioning})" 
+                <button onclick="openPrintPreview(${paper.id})" 
                         class="print-preview-btn">
-                    Print Preview
+                    Alignment Preview
                 </button>
-                <button onclick="removePaper('${paper.name}', ${paper.weight}, ${paper.width}, ${paper.height})" 
+                <button onclick="removePaper(${paper.id})" 
                         class="remove-btn" style="padding: 8px 12px; border: 2px solid #e74c3c; background: white; color: #e74c3c; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.2s ease;">
                     Remove
                 </button>
@@ -157,7 +266,7 @@ function clearSearchInput() {
     renderPaperGrid();
 }
 
-function addNewPaper(e) {
+async function addNewPaper(e) {
     e.preventDefault();
     
     // Clear previous validation errors
@@ -247,47 +356,51 @@ function addNewPaper(e) {
         upDown: [upDown1, upDown2]
     };
     
-    paperTypes.push(newPaper);
-    filteredPapers = [...paperTypes];
-    renderPaperGrid();
-    
-    // Clear form
-    addPaperForm.reset();
-    
-    // Show success message
-    showNotification('Paper type added successfully!', 'success');
-}
-
-function toggleCrossSide(name, weight, width, height) {
-    const paperIndex = paperTypes.findIndex(paper => 
-        paper.name === name && 
-        paper.weight === weight && 
-        paper.width === width && 
-        paper.height === height
-    );
-    
-    if (paperIndex !== -1) {
-        paperTypes[paperIndex].crossSide = paperTypes[paperIndex].crossSide === 'short' ? 'long' : 'short';
-        filteredPapers = [...paperTypes];
-        renderPaperGrid();
-        showNotification('Cross side updated!', 'success');
+    try {
+        await savePaperType(newPaper);
+        
+        // Reload paper types from database
+        await loadPaperTypes();
+        
+        // Clear form
+        addPaperForm.reset();
+        
+        // Show success message
+        showNotification('Paper type added successfully!', 'success');
+    } catch (error) {
+        showNotification('Failed to add paper type: ' + error.message, 'error');
     }
 }
 
-function removePaper(name, weight, width, height) {
-    if (confirm('Are you sure you want to remove this paper type?')) {
-        const paperIndex = paperTypes.findIndex(paper => 
-            paper.name === name && 
-            paper.weight === weight && 
-            paper.width === width && 
-            paper.height === height
-        );
+async function toggleCrossSide(id) {
+    const paper = paperTypes.find(p => p.id === id);
+    if (!paper) return;
+    
+    const newCrossSide = paper.crossSide === 'short' ? 'long' : 'short';
+    
+    try {
+        await toggleCrossSideAPI(id, newCrossSide);
         
-        if (paperIndex !== -1) {
-            paperTypes.splice(paperIndex, 1);
-            filteredPapers = [...paperTypes];
-            renderPaperGrid();
+        // Reload paper types from database
+        await loadPaperTypes();
+        
+        showNotification('Cross side updated!', 'success');
+    } catch (error) {
+        showNotification('Failed to update cross side: ' + error.message, 'error');
+    }
+}
+
+async function removePaper(id) {
+    if (confirm('Are you sure you want to remove this paper type?')) {
+        try {
+            await deletePaperType(id);
+            
+            // Reload paper types from database
+            await loadPaperTypes();
+            
             showNotification('Paper type removed!', 'success');
+        } catch (error) {
+            showNotification('Failed to remove paper type: ' + error.message, 'error');
         }
     }
 }
@@ -328,13 +441,8 @@ function showNotification(message, type = 'info') {
 }
 
 // Modal functionality for editing cross adjustments
-function openAdjustmentModal(name, weight, width, height) {
-    const paper = paperTypes.find(p => 
-        p.name === name && 
-        p.weight === weight && 
-        p.width === width && 
-        p.height === height
-    );
+function openAdjustmentModal(id) {
+    const paper = paperTypes.find(p => p.id === id);
     
     if (!paper) return;
     
@@ -391,7 +499,7 @@ function openAdjustmentModal(name, weight, width, height) {
                 </div>
                 <div class="modal-footer">
                     <button onclick="closeAdjustmentModal()" class="cancel-btn">Cancel</button>
-                    <button onclick="saveAdjustment('${name}', ${weight}, ${width}, ${height})" class="save-btn">Save Adjustment</button>
+                    <button onclick="saveAdjustment(${id})" class="save-btn">Save Adjustment</button>
                 </div>
             </div>
         </div>
@@ -416,7 +524,7 @@ function closeAdjustmentModal() {
     }
 }
 
-function saveAdjustment(name, weight, width, height) {
+async function saveAdjustment(id) {
     const shortLeftRight1 = parseFloat(document.getElementById('modalShortLeftRight1').value) || 0.0;
     const shortLeftRight2 = parseFloat(document.getElementById('modalShortLeftRight2').value) || 0.0;
     const shortUpDown1 = parseFloat(document.getElementById('modalShortUpDown1').value) || 0.0;
@@ -427,28 +535,27 @@ function saveAdjustment(name, weight, width, height) {
     const longUpDown1 = parseFloat(document.getElementById('modalLongUpDown1').value) || 0.0;
     const longUpDown2 = parseFloat(document.getElementById('modalLongUpDown2').value) || 0.0;
     
-    const paperIndex = paperTypes.findIndex(paper => 
-        paper.name === name && 
-        paper.weight === weight && 
-        paper.width === width && 
-        paper.height === height
-    );
+    const crossAdjust = {
+        short: {
+            leftRight: [shortLeftRight1, shortLeftRight2],
+            upDown: [shortUpDown1, shortUpDown2]
+        },
+        long: {
+            leftRight: [longLeftRight1, longLeftRight2],
+            upDown: [longUpDown1, longUpDown2]
+        }
+    };
     
-    if (paperIndex !== -1) {
-        paperTypes[paperIndex].crossAdjust = {
-            short: {
-                leftRight: [shortLeftRight1, shortLeftRight2],
-                upDown: [shortUpDown1, shortUpDown2]
-            },
-            long: {
-                leftRight: [longLeftRight1, longLeftRight2],
-                upDown: [longUpDown1, longUpDown2]
-            }
-        };
-        filteredPapers = [...paperTypes];
-        renderPaperGrid();
+    try {
+        await updateCrossAdjustments(id, crossAdjust);
+        
+        // Reload paper types from database
+        await loadPaperTypes();
+        
         closeAdjustmentModal();
         showNotification('Cross adjustments saved!', 'success');
+    } catch (error) {
+        showNotification('Failed to save adjustments: ' + error.message, 'error');
     }
 }
 
@@ -782,11 +889,9 @@ function showDuplicateWarning(existingPaper) {
 }
 
 // Print Preview functionality
-function openPrintPreview(name, weight, width, height, coating, printingWedges, nozzleReconditioning) {
+function openPrintPreview(id) {
     const modal = document.getElementById('printPreviewModal');
-    const paper = paperTypes.find(p => 
-        p.name === name && p.weight === weight && p.width === width && p.height === height
-    );
+    const paper = paperTypes.find(p => p.id === id);
     
     if (!paper) return;
     
@@ -802,6 +907,9 @@ function openPrintPreview(name, weight, width, height, coating, printingWedges, 
     // Update preview paper styling based on coating
     const previewPaper = document.getElementById('previewPaper');
     previewPaper.className = `preview-paper ${coating}`;
+    
+    // Add alignment crosses to the preview
+    addAlignmentCrosses(paper);
     
     // Show modal
     modal.style.display = 'block';
@@ -831,83 +939,88 @@ function setupPrintPreviewModal() {
         }
     }
     
-    // Print functionality
+    // Print functionality - DISABLED for personal use only
     printBtn.onclick = function() {
-        // Create a new window for printing
-        const printWindow = window.open('', '_blank');
-        const paper = getCurrentPreviewPaper();
-        
-        printWindow.document.write(`
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <title>Print Preview - ${paper.name}</title>
-                <style>
-                    body { font-family: Arial, sans-serif; margin: 20px; }
-                    .print-header { text-align: center; margin-bottom: 30px; }
-                    .print-paper { 
-                        border: 2px solid #333; 
-                        margin: 20px auto; 
-                        padding: 20px; 
-                        max-width: 600px;
-                        background: #fafafa;
-                    }
-                    .print-grid { 
-                        display: grid; 
-                        grid-template-columns: repeat(3, 1fr); 
-                        gap: 10px; 
-                        margin-bottom: 20px; 
-                    }
-                    .print-cell { 
-                        border: 1px solid #ccc; 
-                        height: 60px; 
-                        display: flex; 
-                        align-items: center; 
-                        justify-content: center; 
-                        background: white;
-                    }
-                    .print-info { background: white; padding: 15px; border: 1px solid #ddd; }
-                    @media print { body { margin: 0; } }
-                </style>
-            </head>
-            <body>
-                <div class="print-header">
-                    <h1>Canon Viaprint 3200 - Print Preview</h1>
-                    <h2>${paper.name}</h2>
-                </div>
-                <div class="print-paper">
-                    <div class="print-grid">
-                        <div class="print-cell">Test Pattern</div>
-                        <div class="print-cell">Test Pattern</div>
-                        <div class="print-cell">Test Pattern</div>
-                        <div class="print-cell">Test Pattern</div>
-                        <div class="print-cell">Test Pattern</div>
-                        <div class="print-cell">Test Pattern</div>
-                        <div class="print-cell">Test Pattern</div>
-                        <div class="print-cell">Test Pattern</div>
-                        <div class="print-cell">Test Pattern</div>
-                    </div>
-                    <div class="print-info">
-                        <h3>Paper Specifications</h3>
-                        <p><strong>Name:</strong> ${paper.name}</p>
-                        <p><strong>Weight:</strong> ${paper.weight}gr</p>
-                        <p><strong>Dimensions:</strong> ${paper.width}×${paper.height}mm</p>
-                        <p><strong>Coating:</strong> ${paper.coating}</p>
-                        <p><strong>Cross Side:</strong> ${paper.crossSide === 'short' ? 'Short Side' : 'Long Side'}</p>
-                        <p><strong>Printing Wedges:</strong> ${paper.printingWedges ? 'Suitable' : 'Not Suitable'}</p>
-                        <p><strong>Nozzle Reconditioning:</strong> ${paper.nozzleReconditioning ? 'Suitable' : 'Not Suitable'}</p>
-                        <h4>Cross Adjustments (${paper.crossSide === 'short' ? 'Short Side' : 'Long Side'}):</h4>
-                        <p><strong>Left/Right:</strong> ${paper.crossAdjust[paper.crossSide].leftRight[0]}, ${paper.crossAdjust[paper.crossSide].leftRight[1]}</p>
-                        <p><strong>Up/Down:</strong> ${paper.crossAdjust[paper.crossSide].upDown[0]}, ${paper.crossAdjust[paper.crossSide].upDown[1]}</p>
-                    </div>
-                </div>
-            </body>
-            </html>
-        `);
-        
-        printWindow.document.close();
-        printWindow.print();
+        showNotification('Print functionality disabled - This is for personal alignment reference only', 'info');
     }
+}
+
+function addAlignmentCrosses(paper) {
+    const previewGrid = document.querySelector('.preview-grid');
+    if (!previewGrid) return;
+    
+    // Clear existing crosses
+    previewGrid.querySelectorAll('.alignment-cross').forEach(cross => cross.remove());
+    
+    const adjustments = paper.crossAdjust[paper.crossSide];
+    const gridCells = previewGrid.querySelectorAll('.preview-cell');
+    
+    // Add alignment crosses to each cell
+    gridCells.forEach((cell, index) => {
+        const cross = document.createElement('div');
+        cross.className = 'alignment-cross';
+        cross.style.cssText = `
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 10;
+        `;
+        
+        // Create cross lines
+        const horizontalLine = document.createElement('div');
+        horizontalLine.style.cssText = `
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #ff0000;
+            transform: translateY(-50%);
+        `;
+        
+        const verticalLine = document.createElement('div');
+        verticalLine.style.cssText = `
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #ff0000;
+            transform: translateX(-50%);
+        `;
+        
+        // Apply adjustments to cross position
+        const lrAdjust = adjustments.leftRight[0] + adjustments.leftRight[1];
+        const udAdjust = adjustments.upDown[0] + adjustments.upDown[1];
+        
+        cross.style.transform = `translate(calc(-50% + ${lrAdjust * 10}px), calc(-50% + ${udAdjust * 10}px))`;
+        
+        cross.appendChild(horizontalLine);
+        cross.appendChild(verticalLine);
+        
+        // Position the cell relatively
+        cell.style.position = 'relative';
+        cell.appendChild(cross);
+        
+        // Add adjustment values as text
+        const adjustmentText = document.createElement('div');
+        adjustmentText.style.cssText = `
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            font-size: 10px;
+            color: #666;
+            background: rgba(255,255,255,0.8);
+            padding: 2px 4px;
+            border-radius: 2px;
+        `;
+        adjustmentText.textContent = `L/R: ${adjustments.leftRight[0]},${adjustments.leftRight[1]} | U/D: ${adjustments.upDown[0]},${adjustments.upDown[1]}`;
+        cell.appendChild(adjustmentText);
+    });
 }
 
 function getCurrentPreviewPaper() {
