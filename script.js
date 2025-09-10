@@ -32,6 +32,8 @@ const addPaperForm = document.getElementById('addPaperForm');
 document.addEventListener('DOMContentLoaded', function() {
     renderPaperGrid();
     setupEventListeners();
+    registerServiceWorker();
+    setupPWAFeatures();
 });
 
 function setupEventListeners() {
@@ -363,3 +365,206 @@ document.addEventListener('keydown', function(e) {
         }
     }
 });
+
+// PWA Service Worker Registration
+function registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('SW registered: ', registration);
+                    
+                    // Check for updates
+                    registration.addEventListener('updatefound', () => {
+                        const newWorker = registration.installing;
+                        newWorker.addEventListener('statechange', () => {
+                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                // New content is available, show update notification
+                                showUpdateNotification();
+                            }
+                        });
+                    });
+                })
+                .catch(registrationError => {
+                    console.log('SW registration failed: ', registrationError);
+                });
+        });
+    }
+}
+
+// PWA Features Setup
+function setupPWAFeatures() {
+    // Install prompt
+    let deferredPrompt;
+    const installButton = createInstallButton();
+    
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        installButton.style.display = 'block';
+    });
+    
+    installButton.addEventListener('click', async () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log(`User response to the install prompt: ${outcome}`);
+            deferredPrompt = null;
+            installButton.style.display = 'none';
+        }
+    });
+    
+    // Handle app installed
+    window.addEventListener('appinstalled', (evt) => {
+        console.log('PWA was installed');
+        installButton.style.display = 'none';
+        showNotification('App installed successfully!', 'success');
+    });
+    
+    // Offline/Online status
+    window.addEventListener('online', () => {
+        showNotification('You are back online!', 'success');
+        // Sync any pending data
+        syncPendingData();
+    });
+    
+    window.addEventListener('offline', () => {
+        showNotification('You are offline. Some features may be limited.', 'info');
+    });
+    
+    // Add touch gestures for mobile
+    setupTouchGestures();
+}
+
+// Create install button
+function createInstallButton() {
+    const button = document.createElement('button');
+    button.id = 'installButton';
+    button.innerHTML = '📱 Install App';
+    button.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 25px;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        z-index: 1000;
+        display: none;
+        transition: all 0.3s ease;
+    `;
+    
+    button.addEventListener('mouseenter', () => {
+        button.style.transform = 'translateY(-2px)';
+        button.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.4)';
+    });
+    
+    button.addEventListener('mouseleave', () => {
+        button.style.transform = 'translateY(0)';
+        button.style.boxShadow = '0 4px 15px rgba(102, 126, 234, 0.3)';
+    });
+    
+    document.body.appendChild(button);
+    return button;
+}
+
+// Show update notification
+function showUpdateNotification() {
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #4CAF50;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        z-index: 1001;
+        font-weight: 500;
+        text-align: center;
+    `;
+    notification.innerHTML = `
+        <div>New version available!</div>
+        <button onclick="updateApp()" style="background: white; color: #4CAF50; border: none; padding: 8px 16px; border-radius: 4px; margin-top: 8px; cursor: pointer; font-weight: 600;">
+            Update Now
+        </button>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Auto remove after 10 seconds
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+        }
+    }, 10000);
+}
+
+// Update app function
+function updateApp() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistration().then(registration => {
+            if (registration && registration.waiting) {
+                registration.waiting.postMessage({ action: 'skipWaiting' });
+                window.location.reload();
+            }
+        });
+    }
+}
+
+// Sync pending data when back online
+function syncPendingData() {
+    // In a real app, you would sync any data that was saved offline
+    console.log('Syncing pending data...');
+    // For now, just show a notification
+    showNotification('Data synced successfully!', 'success');
+}
+
+// Touch gestures for mobile
+function setupTouchGestures() {
+    let startY = 0;
+    let startX = 0;
+    
+    document.addEventListener('touchstart', (e) => {
+        startY = e.touches[0].clientY;
+        startX = e.touches[0].clientX;
+    });
+    
+    document.addEventListener('touchmove', (e) => {
+        if (!startY || !startX) return;
+        
+        const currentY = e.touches[0].clientY;
+        const currentX = e.touches[0].clientX;
+        const diffY = startY - currentY;
+        const diffX = startX - currentX;
+        
+        // Swipe down to refresh
+        if (diffY < -100 && Math.abs(diffX) < 50) {
+            // Pull to refresh functionality
+            showNotification('Refreshing...', 'info');
+            setTimeout(() => {
+                window.location.reload();
+            }, 500);
+        }
+    });
+    
+    document.addEventListener('touchend', () => {
+        startY = 0;
+        startX = 0;
+    });
+}
+
+// Listen for service worker messages
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.addEventListener('message', event => {
+        if (event.data && event.data.action === 'skipWaiting') {
+            window.location.reload();
+        }
+    });
+}
