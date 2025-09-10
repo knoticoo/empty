@@ -185,16 +185,16 @@ function renderPaperGrid() {
                 </div>
             </div>
             <div class="paper-specs">
-                <span class="spec-badge coating-badge ${paper.coating}">${paper.coating === 'coated' ? 'Pārklāts' : 'Nepārklāts'}</span>
+                <span class="spec-badge coating-badge ${paper.coating}">${paper.coating === 'coated' ? 'krītots' : 'Nekrītots'}</span>
                 <span class="spec-badge">${paper.weight}gr</span>
                 <span class="spec-badge">${paper.width}×${paper.height}mm</span>
             </div>
             <div class="suitability-badges">
                 <span class="suitability-badge ${paper.printingWedges ? 'good' : 'not-suitable'}">
-                    ${paper.printingWedges ? 'Ķīles ✓' : 'Bez ķīlēm'}
+                    ${paper.printingWedges ? 'Wedges ✓' : 'No Wedges'}
                 </span>
                 <span class="suitability-badge ${paper.nozzleReconditioning ? 'good' : 'not-suitable'}">
-                    ${paper.nozzleReconditioning ? 'Sprauslas ✓' : 'Bez sprauslām'}
+                    ${paper.nozzleReconditioning ? 'Nozzle ✓' : 'No Nozzle'}
                 </span>
             </div>
             <div class="cross-side ${paper.crossSide === 'short' ? 'grain-short' : 'grain-long'}">
@@ -918,8 +918,8 @@ function openEditPaperModal(id) {
                                 <option value="long" ${paper.crossSide === 'long' ? 'selected' : ''}>Garā puse (Garā grauds)</option>
                             </select>
                             <select id="editPaperCoating" required>
-                                <option value="coated" ${paper.coating === 'coated' ? 'selected' : ''}>Pārklāts</option>
-                                <option value="uncoated" ${paper.coating === 'uncoated' ? 'selected' : ''}>Nepārklāts</option>
+                                <option value="coated" ${paper.coating === 'coated' ? 'selected' : ''}>krītots</option>
+                                <option value="uncoated" ${paper.coating === 'uncoated' ? 'selected' : ''}>Nekrītots</option>
                             </select>
                         </div>
                         <div class="form-row">
