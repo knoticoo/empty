@@ -762,6 +762,29 @@ body {
     color: #6c757d;
 }
 
+/* Orientation Sections */
+.orientation-section {
+    margin-bottom: 25px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.orientation-section h4 {
+    color: #495057;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.orientation-section:last-child {
+    margin-bottom: 0;
+}
+
 /* Modal Styles */
 .modal-overlay {
     position: fixed;
