@@ -22,7 +22,7 @@ async function loadPaperTypes() {
         renderPaperGrid();
     } catch (error) {
         console.error('Error loading paper types:', error);
-        showNotification('Failed to load paper types. Using offline mode.', 'info');
+        showNotification('Neizdevās ielādēt papīra veidus. Izmanto bezsaistes režīmu.', 'info');
         // Fallback to empty array if API fails
         paperTypes = [];
         filteredPapers = [];
@@ -163,7 +163,7 @@ function setupEventListeners() {
 
 function renderPaperGrid() {
     if (filteredPapers.length === 0) {
-        paperGrid.innerHTML = '<div class="no-results">No paper types found matching your criteria.</div>';
+        paperGrid.innerHTML = '<div class="no-results">Nav atrasti papīra veidi, kas atbilst jūsu kritērijiem.</div>';
         return;
     }
     
@@ -172,66 +172,66 @@ function renderPaperGrid() {
             <div class="paper-name">${paper.name}</div>
             <div class="paper-details">
                 <div class="detail-item">
-                    <span class="detail-label">Weight:</span>
+                    <span class="detail-label">Svars:</span>
                     <span class="detail-value">${paper.weight}gr</span>
                 </div>
                 <div class="detail-item">
-                    <span class="detail-label">Dimensions:</span>
+                    <span class="detail-label">Izmēri:</span>
                     <span class="detail-value">${paper.width}×${paper.height}mm</span>
                 </div>
                 <div class="detail-item">
-                    <span class="detail-label">Aspect Ratio:</span>
+                    <span class="detail-label">Malu attiecība:</span>
                     <span class="detail-value">${(paper.width / paper.height).toFixed(2)}:1</span>
                 </div>
             </div>
             <div class="paper-specs">
-                <span class="spec-badge coating-badge ${paper.coating}">${paper.coating}</span>
+                <span class="spec-badge coating-badge ${paper.coating}">${paper.coating === 'coated' ? 'Pārklāts' : 'Nepārklāts'}</span>
                 <span class="spec-badge">${paper.weight}gr</span>
                 <span class="spec-badge">${paper.width}×${paper.height}mm</span>
             </div>
             <div class="suitability-badges">
                 <span class="suitability-badge ${paper.printingWedges ? 'good' : 'not-suitable'}">
-                    ${paper.printingWedges ? 'Wedges ✓' : 'No Wedges'}
+                    ${paper.printingWedges ? 'Ķīles ✓' : 'Bez ķīlēm'}
                 </span>
                 <span class="suitability-badge ${paper.nozzleReconditioning ? 'good' : 'not-suitable'}">
-                    ${paper.nozzleReconditioning ? 'Nozzle ✓' : 'No Nozzle'}
+                    ${paper.nozzleReconditioning ? 'Sprauslas ✓' : 'Bez sprauslām'}
                 </span>
             </div>
             <div class="cross-side ${paper.crossSide === 'short' ? 'grain-short' : 'grain-long'}">
-                <div class="cross-side-label">Cross Side (Grain Direction)</div>
+                <div class="cross-side-label">Šķērsa puse (Grauda virziens)</div>
                 <div class="cross-side-value">
-                    ${paper.crossSide === 'short' ? 'Short Side' : 'Long Side'}
+                    ${paper.crossSide === 'short' ? 'Īsā puse' : 'Garā puse'}
                 </div>
             </div>
             <div class="cross-adjustment-display">
-                <div class="adjustment-title">Cross Adjustment (${paper.crossSide === 'short' ? 'Short Side' : 'Long Side'}):</div>
+                <div class="adjustment-title">Šķērsa regulējums (${paper.crossSide === 'short' ? 'Īsā puse' : 'Garā puse'}):</div>
                 <div class="adjustment-values">
                     <div class="adjustment-row">
-                        <span class="adjustment-label">Left/Right:</span>
+                        <span class="adjustment-label">Kreisā/Labā:</span>
                         <span class="adjustment-value">${paper.crossAdjust[paper.crossSide].leftRight[0]}, ${paper.crossAdjust[paper.crossSide].leftRight[1]}</span>
                     </div>
                     <div class="adjustment-row">
-                        <span class="adjustment-label">Up/Down:</span>
+                        <span class="adjustment-label">Augšā/Lejā:</span>
                         <span class="adjustment-value">${paper.crossAdjust[paper.crossSide].upDown[0]}, ${paper.crossAdjust[paper.crossSide].upDown[1]}</span>
                     </div>
                 </div>
                 <button onclick="openAdjustmentModal(${paper.id})" 
                         class="edit-adjustment-btn">
-                    Edit Adjustments
+                    Rediģēt regulējumus
                 </button>
             </div>
             <div class="paper-actions" style="margin-top: 15px; display: flex; gap: 10px;">
                 <button onclick="toggleCrossSide(${paper.id})" 
                         class="toggle-btn" style="flex: 1; padding: 8px 12px; border: 2px solid #667eea; background: white; color: #667eea; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.2s ease;">
-                    Switch to ${paper.crossSide === 'short' ? 'Long Side' : 'Short Side'}
+                    Pārslēgt uz ${paper.crossSide === 'short' ? 'Garā puse' : 'Īsā puse'}
                 </button>
-                <button onclick="openPrintPreview(${paper.id})" 
-                        class="print-preview-btn">
-                    Alignment Preview
+                <button onclick="openEditPaperModal(${paper.id})" 
+                        class="edit-btn" style="padding: 8px 12px; border: 2px solid #28a745; background: white; color: #28a745; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.2s ease;">
+                    Rediģēt
                 </button>
                 <button onclick="removePaper(${paper.id})" 
                         class="remove-btn" style="padding: 8px 12px; border: 2px solid #e74c3c; background: white; color: #e74c3c; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.2s ease;">
-                    Remove
+                    Dzēst
                 </button>
             </div>
         </div>
@@ -289,32 +289,32 @@ async function addNewPaper(e) {
     let hasErrors = false;
     
     if (!name) {
-        showValidationError('paperName', 'Paper name is required');
+        showValidationError('paperName', 'Papīra nosaukums ir obligāts');
         hasErrors = true;
     }
     
     if (!weight || weight < 1) {
-        showValidationError('paperWeight', 'Weight must be at least 1gr');
+        showValidationError('paperWeight', 'Svars jābūt vismaz 1gr');
         hasErrors = true;
     }
     
     if (!width || width < 1) {
-        showValidationError('paperWidth', 'Width must be at least 1mm');
+        showValidationError('paperWidth', 'Platums jābūt vismaz 1mm');
         hasErrors = true;
     }
     
     if (!height || height < 1) {
-        showValidationError('paperHeight', 'Height must be at least 1mm');
+        showValidationError('paperHeight', 'Augstums jābūt vismaz 1mm');
         hasErrors = true;
     }
     
     if (!crossSide) {
-        showValidationError('crossSide', 'Cross side selection is required');
+        showValidationError('crossSide', 'Šķērsa puses izvēle ir obligāta');
         hasErrors = true;
     }
     
     if (!coating) {
-        showValidationError('paperCoating', 'Coating selection is required');
+        showValidationError('paperCoating', 'Pārklājuma izvēle ir obligāta');
         hasErrors = true;
     }
     
@@ -366,9 +366,9 @@ async function addNewPaper(e) {
         addPaperForm.reset();
         
         // Show success message
-        showNotification('Paper type added successfully!', 'success');
+        showNotification('Papīra veids veiksmīgi pievienots!', 'success');
     } catch (error) {
-        showNotification('Failed to add paper type: ' + error.message, 'error');
+        showNotification('Neizdevās pievienot papīra veidu: ' + error.message, 'error');
     }
 }
 
@@ -384,23 +384,23 @@ async function toggleCrossSide(id) {
         // Reload paper types from database
         await loadPaperTypes();
         
-        showNotification('Cross side updated!', 'success');
+        showNotification('Šķērsa puse atjaunota!', 'success');
     } catch (error) {
-        showNotification('Failed to update cross side: ' + error.message, 'error');
+        showNotification('Neizdevās atjaunot šķērsa pusi: ' + error.message, 'error');
     }
 }
 
 async function removePaper(id) {
-    if (confirm('Are you sure you want to remove this paper type?')) {
+    if (confirm('Vai tiešām vēlaties dzēst šo papīra veidu?')) {
         try {
             await deletePaperType(id);
             
             // Reload paper types from database
             await loadPaperTypes();
             
-            showNotification('Paper type removed!', 'success');
+            showNotification('Papīra veids dzēsts!', 'success');
         } catch (error) {
-            showNotification('Failed to remove paper type: ' + error.message, 'error');
+            showNotification('Neizdevās dzēst papīra veidu: ' + error.message, 'error');
         }
     }
 }
@@ -451,16 +451,16 @@ function openAdjustmentModal(id) {
         <div id="adjustmentModal" class="modal-overlay">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>Edit Cross Adjustment - ${paper.name}</h3>
+                    <h3>Rediģēt šķērsa regulējumu - ${paper.name}</h3>
                     <button onclick="closeAdjustmentModal()" class="close-btn">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <div class="constraint-help">💡 Values are automatically constrained: Left/Right and Up/Down pairs must sum to zero</div>
+                    <div class="constraint-help">💡 Vērtības tiek automātiski ierobežotas: Kreisā/Labā un Augšā/Lejā pāriem jābūt nullei</div>
                     <div class="adjustment-form">
                         <div class="orientation-section">
-                            <h4>Short Side Adjustments</h4>
+                            <h4>Īsās puses regulējumi</h4>
                             <div class="adjustment-group">
-                                <label>Left/Right Adjustment:</label>
+                                <label>Kreisā/Labā regulējums:</label>
                                 <div class="adjustment-inputs">
                                     <input type="number" id="modalShortLeftRight1" value="${paper.crossAdjust.short.leftRight[0]}" step="0.1">
                                     <span>,</span>
@@ -468,7 +468,7 @@ function openAdjustmentModal(id) {
                                 </div>
                             </div>
                             <div class="adjustment-group">
-                                <label>Up/Down Adjustment:</label>
+                                <label>Augšā/Lejā regulējums:</label>
                                 <div class="adjustment-inputs">
                                     <input type="number" id="modalShortUpDown1" value="${paper.crossAdjust.short.upDown[0]}" step="0.1">
                                     <span>,</span>
@@ -477,9 +477,9 @@ function openAdjustmentModal(id) {
                             </div>
                         </div>
                         <div class="orientation-section">
-                            <h4>Long Side Adjustments</h4>
+                            <h4>Garās puses regulējumi</h4>
                             <div class="adjustment-group">
-                                <label>Left/Right Adjustment:</label>
+                                <label>Kreisā/Labā regulējums:</label>
                                 <div class="adjustment-inputs">
                                     <input type="number" id="modalLongLeftRight1" value="${paper.crossAdjust.long.leftRight[0]}" step="0.1">
                                     <span>,</span>
@@ -487,7 +487,7 @@ function openAdjustmentModal(id) {
                                 </div>
                             </div>
                             <div class="adjustment-group">
-                                <label>Up/Down Adjustment:</label>
+                                <label>Augšā/Lejā regulējums:</label>
                                 <div class="adjustment-inputs">
                                     <input type="number" id="modalLongUpDown1" value="${paper.crossAdjust.long.upDown[0]}" step="0.1">
                                     <span>,</span>
@@ -498,8 +498,8 @@ function openAdjustmentModal(id) {
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button onclick="closeAdjustmentModal()" class="cancel-btn">Cancel</button>
-                    <button onclick="saveAdjustment(${id})" class="save-btn">Save Adjustment</button>
+                    <button onclick="closeAdjustmentModal()" class="cancel-btn">Atcelt</button>
+                    <button onclick="saveAdjustment(${id})" class="save-btn">Saglabāt regulējumu</button>
                 </div>
             </div>
         </div>
@@ -553,9 +553,9 @@ async function saveAdjustment(id) {
         await loadPaperTypes();
         
         closeAdjustmentModal();
-        showNotification('Cross adjustments saved!', 'success');
+        showNotification('Šķērsa regulējumi saglabāti!', 'success');
     } catch (error) {
-        showNotification('Failed to save adjustments: ' + error.message, 'error');
+        showNotification('Neizdevās saglabāt regulējumus: ' + error.message, 'error');
     }
 }
 
@@ -699,18 +699,18 @@ function setupPWAFeatures() {
     window.addEventListener('appinstalled', (evt) => {
         console.log('PWA was installed');
         installButton.style.display = 'none';
-        showNotification('App installed successfully!', 'success');
+        showNotification('Lietotne veiksmīgi instalēta!', 'success');
     });
     
     // Offline/Online status
     window.addEventListener('online', () => {
-        showNotification('You are back online!', 'success');
+        showNotification('Jūs atkal esat tiešsaistē!', 'success');
         // Sync any pending data
         syncPendingData();
     });
     
     window.addEventListener('offline', () => {
-        showNotification('You are offline. Some features may be limited.', 'info');
+        showNotification('Jūs esat bezsaistē. Dažas funkcijas var būt ierobežotas.', 'info');
     });
     
     // Add touch gestures for mobile
@@ -721,7 +721,7 @@ function setupPWAFeatures() {
 function createInstallButton() {
     const button = document.createElement('button');
     button.id = 'installButton';
-    button.innerHTML = '📱 Install App';
+    button.innerHTML = '📱 Instalēt lietotni';
     button.style.cssText = `
         position: fixed;
         bottom: 20px;
@@ -771,9 +771,9 @@ function showUpdateNotification() {
         text-align: center;
     `;
     notification.innerHTML = `
-        <div>New version available!</div>
+        <div>Pieejama jauna versija!</div>
         <button onclick="updateApp()" style="background: white; color: #4CAF50; border: none; padding: 8px 16px; border-radius: 4px; margin-top: 8px; cursor: pointer; font-weight: 600;">
-            Update Now
+            Atjaunot tagad
         </button>
     `;
     
@@ -804,7 +804,7 @@ function syncPendingData() {
     // In a real app, you would sync any data that was saved offline
     console.log('Syncing pending data...');
     // For now, just show a notification
-    showNotification('Data synced successfully!', 'success');
+        showNotification('Dati veiksmīgi sinhronizēti!', 'success');
 }
 
 // Touch gestures for mobile
@@ -829,7 +829,7 @@ function setupTouchGestures() {
         // and only if the user is already at the top of the page
         if (diffY > 100 && Math.abs(diffX) < 50 && window.scrollY === 0) {
             // Pull to refresh functionality
-            showNotification('Refreshing...', 'info');
+            showNotification('Atjaunina...', 'info');
             setTimeout(() => {
                 window.location.reload();
             }, 500);
@@ -879,160 +879,125 @@ function showDuplicateWarning(existingPaper) {
     const warningDiv = document.createElement('div');
     warningDiv.className = 'duplicate-warning';
     warningDiv.innerHTML = `
-        <strong>⚠️ Duplicate Paper Detected!</strong><br>
-        A paper with the same name, weight, and dimensions already exists:<br>
+        <strong>⚠️ Atklāts dublēts papīrs!</strong><br>
+        Papīrs ar tādu pašu nosaukumu, svaru un izmēriem jau eksistē:<br>
         <strong>${existingPaper.name}</strong> - ${existingPaper.weight}gr, ${existingPaper.width}×${existingPaper.height}mm<br>
-        <small>Please modify the specifications or use a different name.</small>
+        <small>Lūdzu mainiet specifikācijas vai izmantojiet citu nosaukumu.</small>
     `;
     
     form.appendChild(warningDiv);
 }
 
-// Print Preview functionality
-function openPrintPreview(id) {
-    const modal = document.getElementById('printPreviewModal');
+// Edit Paper functionality
+function openEditPaperModal(id) {
     const paper = paperTypes.find(p => p.id === id);
     
     if (!paper) return;
     
-    // Update preview content
-    document.getElementById('previewPaperName').textContent = paper.name;
-    document.getElementById('previewPaperSpecs').textContent = 
-        `${paper.weight}gr • ${paper.width}×${paper.height}mm • ${paper.coating}`;
+    // Create modal HTML
+    const modalHTML = `
+        <div id="editPaperModal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Rediģēt papīru - ${paper.name}</h3>
+                    <button onclick="closeEditPaperModal()" class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="editPaperForm" class="edit-form">
+                        <div class="form-row">
+                            <input type="text" id="editPaperName" value="${paper.name}" required>
+                            <input type="number" id="editPaperWeight" value="${paper.weight}" min="1" required>
+                        </div>
+                        <div class="form-row">
+                            <input type="number" id="editPaperWidth" value="${paper.width}" min="1" required>
+                            <input type="number" id="editPaperHeight" value="${paper.height}" min="1" required>
+                        </div>
+                        <div class="form-row">
+                            <select id="editCrossSide" required>
+                                <option value="short" ${paper.crossSide === 'short' ? 'selected' : ''}>Īsā puse (Īsā grauds)</option>
+                                <option value="long" ${paper.crossSide === 'long' ? 'selected' : ''}>Garā puse (Garā grauds)</option>
+                            </select>
+                            <select id="editPaperCoating" required>
+                                <option value="coated" ${paper.coating === 'coated' ? 'selected' : ''}>Pārklāts</option>
+                                <option value="uncoated" ${paper.coating === 'uncoated' ? 'selected' : ''}>Nepārklāts</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="editPrintingWedges" ${paper.printingWedges ? 'checked' : ''}>
+                                    <span class="checkmark"></span>
+                                    Piemērots drukāšanas ķīlēm
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="editNozzleReconditioning" ${paper.nozzleReconditioning ? 'checked' : ''}>
+                                    <span class="checkmark"></span>
+                                    Piemērots sprauslu atjaunošanai
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="closeEditPaperModal()" class="cancel-btn">Atcelt</button>
+                    <button onclick="saveEditPaper(${id})" class="save-btn">Saglabāt izmaiņas</button>
+                </div>
+            </div>
+        </div>
+    `;
     
-    const adjustments = paper.crossAdjust[paper.crossSide];
-    document.getElementById('previewAdjustments').textContent = 
-        `Cross Adjustments: L/R: ${adjustments.leftRight[0]}, ${adjustments.leftRight[1]} | U/D: ${adjustments.upDown[0]}, ${adjustments.upDown[1]}`;
+    // Add modal to body
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
     
-    // Update preview paper styling based on coating
-    const previewPaper = document.getElementById('previewPaper');
-    previewPaper.className = `preview-paper ${coating}`;
-    
-    // Add alignment crosses to the preview
-    addAlignmentCrosses(paper);
-    
-    // Show modal
-    modal.style.display = 'block';
-    
-    // Setup modal event listeners
-    setupPrintPreviewModal();
+    // Focus first input
+    setTimeout(() => {
+        document.getElementById('editPaperName').focus();
+    }, 100);
 }
 
-function setupPrintPreviewModal() {
-    const modal = document.getElementById('printPreviewModal');
-    const closeBtn = document.querySelector('.close');
-    const closePreviewBtn = document.getElementById('closePreviewBtn');
-    const printBtn = document.getElementById('printPreviewBtn');
-    
-    // Close modal functions
-    function closeModal() {
-        modal.style.display = 'none';
-    }
-    
-    closeBtn.onclick = closeModal;
-    closePreviewBtn.onclick = closeModal;
-    
-    // Close when clicking outside modal
-    window.onclick = function(event) {
-        if (event.target === modal) {
-            closeModal();
-        }
-    }
-    
-    // Print functionality - DISABLED for personal use only
-    printBtn.onclick = function() {
-        showNotification('Print functionality disabled - This is for personal alignment reference only', 'info');
+function closeEditPaperModal() {
+    const modal = document.getElementById('editPaperModal');
+    if (modal) {
+        modal.remove();
     }
 }
 
-function addAlignmentCrosses(paper) {
-    const previewGrid = document.querySelector('.preview-grid');
-    if (!previewGrid) return;
+async function saveEditPaper(id) {
+    const name = document.getElementById('editPaperName').value.trim();
+    const weight = parseInt(document.getElementById('editPaperWeight').value);
+    const width = parseInt(document.getElementById('editPaperWidth').value);
+    const height = parseInt(document.getElementById('editPaperHeight').value);
+    const crossSide = document.getElementById('editCrossSide').value;
+    const coating = document.getElementById('editPaperCoating').value;
+    const printingWedges = document.getElementById('editPrintingWedges').checked;
+    const nozzleReconditioning = document.getElementById('editNozzleReconditioning').checked;
     
-    // Clear existing crosses
-    previewGrid.querySelectorAll('.alignment-cross').forEach(cross => cross.remove());
+    // Validation
+    if (!name || !weight || !width || !height || !crossSide || !coating) {
+        showNotification('Lūdzu aizpildiet visus obligātos laukus', 'error');
+        return;
+    }
     
-    const adjustments = paper.crossAdjust[paper.crossSide];
-    const gridCells = previewGrid.querySelectorAll('.preview-cell');
+    const updatedPaper = {
+        name,
+        weight,
+        width,
+        height,
+        crossSide,
+        coating,
+        printingWedges,
+        nozzleReconditioning
+    };
     
-    // Add alignment crosses to each cell
-    gridCells.forEach((cell, index) => {
-        const cross = document.createElement('div');
-        cross.className = 'alignment-cross';
-        cross.style.cssText = `
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 20px;
-            height: 20px;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 10;
-        `;
+    try {
+        await updatePaperType(id, updatedPaper);
         
-        // Create cross lines
-        const horizontalLine = document.createElement('div');
-        horizontalLine.style.cssText = `
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: #ff0000;
-            transform: translateY(-50%);
-        `;
+        // Reload paper types from database
+        await loadPaperTypes();
         
-        const verticalLine = document.createElement('div');
-        verticalLine.style.cssText = `
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: #ff0000;
-            transform: translateX(-50%);
-        `;
-        
-        // Apply adjustments to cross position
-        const lrAdjust = adjustments.leftRight[0] + adjustments.leftRight[1];
-        const udAdjust = adjustments.upDown[0] + adjustments.upDown[1];
-        
-        cross.style.transform = `translate(calc(-50% + ${lrAdjust * 10}px), calc(-50% + ${udAdjust * 10}px))`;
-        
-        cross.appendChild(horizontalLine);
-        cross.appendChild(verticalLine);
-        
-        // Position the cell relatively
-        cell.style.position = 'relative';
-        cell.appendChild(cross);
-        
-        // Add adjustment values as text
-        const adjustmentText = document.createElement('div');
-        adjustmentText.style.cssText = `
-            position: absolute;
-            bottom: 2px;
-            right: 2px;
-            font-size: 10px;
-            color: #666;
-            background: rgba(255,255,255,0.8);
-            padding: 2px 4px;
-            border-radius: 2px;
-        `;
-        adjustmentText.textContent = `L/R: ${adjustments.leftRight[0]},${adjustments.leftRight[1]} | U/D: ${adjustments.upDown[0]},${adjustments.upDown[1]}`;
-        cell.appendChild(adjustmentText);
-    });
-}
-
-function getCurrentPreviewPaper() {
-    const name = document.getElementById('previewPaperName').textContent;
-    const specs = document.getElementById('previewPaperSpecs').textContent;
-    const parts = specs.split(' • ');
-    const weight = parseInt(parts[0].replace('gr', ''));
-    const dimensions = parts[1].replace('mm', '').split('×');
-    const width = parseInt(dimensions[0]);
-    const height = parseInt(dimensions[1]);
-    
-    return paperTypes.find(p => 
-        p.name === name && p.weight === weight && p.width === width && p.height === height
-    );
+        closeEditPaperModal();
+        showNotification('Papīrs veiksmīgi atjaunots!', 'success');
+    } catch (error) {
+        showNotification('Neizdevās atjaunot papīru: ' + error.message, 'error');
+    }
 }

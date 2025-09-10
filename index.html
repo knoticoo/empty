@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="lv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#667eea">
-    <meta name="description" content="Manage Canon Viaprint 3200 paper types and cross adjustments">
+    <meta name="description" content="Pārvaldīt Canon Viaprint 3200 papīra veidus un šķērsa regulējumus">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Viaprint Manager">
-    <title>Canon Viaprint 3200 - Paper Type Manager</title>
+    <meta name="apple-mobile-web-app-title" content="Viaprint Pārvaldnieks">
+    <title>Canon Viaprint 3200 - Papīra veidu pārvaldnieks</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="manifest" href="manifest.json">
@@ -18,17 +18,17 @@
     <div class="container">
         <header class="header">
             <h1>Canon Viaprint 3200</h1>
-            <p class="subtitle">Paper Type & Cross-Side Manager</p>
+            <p class="subtitle">Papīra veidu un šķērsa pārvaldnieks</p>
         </header>
 
         <div class="controls">
             <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Search paper types..." class="search-input">
+                <input type="text" id="searchInput" placeholder="Meklēt papīra veidus..." class="search-input">
                 <button id="clearSearch" class="clear-btn">×</button>
             </div>
             <div class="filter-container">
                 <select id="weightFilter" class="filter-select">
-                    <option value="">All Weights</option>
+                    <option value="">Visi svari</option>
                     <option value="80">80gr</option>
                     <option value="90">90gr</option>
                     <option value="100">100gr</option>
@@ -40,7 +40,7 @@
                     <option value="170">170gr</option>
                 </select>
                 <select id="sizeFilter" class="filter-select">
-                    <option value="">All Sizes</option>
+                    <option value="">Visi izmēri</option>
                     <option value="320x252">320×252</option>
                     <option value="355x252">355×252</option>
                     <option value="355x310">355×310</option>
@@ -56,26 +56,26 @@
         </div>
 
         <div class="add-paper-section">
-            <h3>Add New Paper Type</h3>
+            <h3>Pievienot jaunu papīra veidu</h3>
             <form id="addPaperForm" class="add-form">
                 <div class="form-row">
-                    <input type="text" id="paperName" placeholder="Paper Name (e.g., MultiArt Silk)" required>
-                    <input type="number" id="paperWeight" placeholder="Weight (gr)" min="1" required>
+                    <input type="text" id="paperName" placeholder="Papīra nosaukums (piem., MultiArt Silk)" required>
+                    <input type="number" id="paperWeight" placeholder="Svars (gr)" min="1" required>
                 </div>
                 <div class="form-row">
-                    <input type="number" id="paperWidth" placeholder="Width (mm)" min="1" required>
-                    <input type="number" id="paperHeight" placeholder="Height (mm)" min="1" required>
+                    <input type="number" id="paperWidth" placeholder="Platums (mm)" min="1" required>
+                    <input type="number" id="paperHeight" placeholder="Augstums (mm)" min="1" required>
                 </div>
                 <div class="form-row">
                     <select id="crossSide" required>
-                        <option value="">Select Cross Side</option>
-                        <option value="short">Short Side (Grain Short)</option>
-                        <option value="long">Long Side (Grain Long)</option>
+                        <option value="">Izvēlēties šķērsa pusi</option>
+                        <option value="short">Īsā puse (Īsā grauds)</option>
+                        <option value="long">Garā puse (Garā grauds)</option>
                     </select>
                     <select id="paperCoating" required>
-                        <option value="">Select Coating</option>
-                        <option value="coated">Coated</option>
-                        <option value="uncoated">Uncoated</option>
+                        <option value="">Izvēlēties pārklājumu</option>
+                        <option value="coated">Pārklāts</option>
+                        <option value="uncoated">Nepārklāts</option>
                     </select>
                 </div>
                 <div class="form-row">
@@ -83,22 +83,22 @@
                         <label class="checkbox-label">
                             <input type="checkbox" id="printingWedges">
                             <span class="checkmark"></span>
-                            Good for Printing Wedges
+                            Piemērots drukāšanas ķīlēm
                         </label>
                         <label class="checkbox-label">
                             <input type="checkbox" id="nozzleReconditioning">
                             <span class="checkmark"></span>
-                            Good for Nozzle Reconditioning
+                            Piemērots sprauslu atjaunošanai
                         </label>
                     </div>
-                    <button type="submit" class="add-btn">Add Paper</button>
+                    <button type="submit" class="add-btn">Pievienot papīru</button>
                 </div>
                 <div class="cross-adjustment-section">
-                    <h4>Cross Adjustment (Default: 0.0, 0.0)</h4>
-                    <p class="constraint-help">💡 Values are automatically constrained: Left/Right and Up/Down pairs must sum to zero</p>
+                    <h4>Šķērsa regulējums (Noklusējums: 0.0, 0.0)</h4>
+                    <p class="constraint-help">💡 Vērtības tiek automātiski ierobežotas: Kreisā/Labā un Augšā/Lejā pāriem jābūt nullei</p>
                     <div class="form-row">
                         <div class="adjustment-group">
-                            <label>Left/Right:</label>
+                            <label>Kreisā/Labā:</label>
                             <div class="adjustment-inputs">
                                 <input type="number" id="leftRight1" placeholder="0.0" step="0.1" value="0.0">
                                 <span>,</span>
@@ -106,7 +106,7 @@
                             </div>
                         </div>
                         <div class="adjustment-group">
-                            <label>Up/Down:</label>
+                            <label>Augšā/Lejā:</label>
                             <div class="adjustment-inputs">
                                 <input type="number" id="upDown1" placeholder="0.0" step="0.1" value="0.0">
                                 <span>,</span>
@@ -119,41 +119,6 @@
         </div>
     </div>
 
-    <!-- Print Preview Modal -->
-    <div id="printPreviewModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Alignment Preview</h3>
-                <span class="close">&times;</span>
-            </div>
-            <div class="modal-body">
-                <div class="preview-paper" id="previewPaper">
-                    <div class="preview-content">
-                        <div class="preview-grid">
-                            <div class="preview-cell"></div>
-                            <div class="preview-cell"></div>
-                            <div class="preview-cell"></div>
-                            <div class="preview-cell"></div>
-                            <div class="preview-cell"></div>
-                            <div class="preview-cell"></div>
-                            <div class="preview-cell"></div>
-                            <div class="preview-cell"></div>
-                            <div class="preview-cell"></div>
-                        </div>
-                        <div class="preview-info">
-                            <h4 id="previewPaperName">Paper Name</h4>
-                            <p id="previewPaperSpecs">Specifications</p>
-                            <p id="previewAdjustments">Cross Adjustments</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="preview-actions">
-                    <button id="printPreviewBtn" class="btn-primary">Reference Only</button>
-                    <button id="closePreviewBtn" class="btn-secondary">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script src="script.js"></script>
 </body>
