@@ -544,8 +544,9 @@ function setupTouchGestures() {
         const diffY = startY - currentY;
         const diffX = startX - currentX;
         
-        // Swipe down to refresh
-        if (diffY < -100 && Math.abs(diffX) < 50) {
+        // Only trigger refresh on swipe down from the very top of the page
+        // and only if the user is already at the top of the page
+        if (diffY > 100 && Math.abs(diffX) < 50 && window.scrollY === 0) {
             // Pull to refresh functionality
             showNotification('Refreshing...', 'info');
             setTimeout(() => {

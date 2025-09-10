@@ -379,6 +379,11 @@ body {
         gap: 12px;
     }
     
+    .form-row .adjustment-group {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
     .form-row input,
     .form-row select {
         min-width: auto;
@@ -406,15 +411,29 @@ body {
     
     .adjustment-group {
         min-width: auto;
+        flex: 1;
     }
     
     .adjustment-inputs {
         gap: 6px;
+        flex-wrap: wrap;
     }
     
     .adjustment-inputs input {
         font-size: 14px;
         padding: 8px 10px;
+        min-width: 60px;
+        flex: 1;
+    }
+    
+    .cross-adjustment-section {
+        padding: 15px;
+        margin-top: 15px;
+    }
+    
+    .cross-adjustment-section h4 {
+        font-size: 1rem;
+        margin-bottom: 12px;
     }
 }
 
@@ -454,6 +473,27 @@ body {
     
     .adjustment-group {
         min-width: auto;
+        flex: 1;
+    }
+    
+    .adjustment-inputs {
+        gap: 4px;
+    }
+    
+    .adjustment-inputs input {
+        font-size: 13px;
+        padding: 6px 8px;
+        min-width: 50px;
+    }
+    
+    .cross-adjustment-section {
+        padding: 12px;
+        margin-top: 12px;
+    }
+    
+    .cross-adjustment-section h4 {
+        font-size: 0.95rem;
+        margin-bottom: 10px;
     }
 }
 
@@ -685,7 +725,7 @@ body {
     flex-direction: column;
     gap: 8px;
     flex: 1;
-    min-width: 200px;
+    min-width: 150px;
 }
 
 .adjustment-group label {
@@ -698,6 +738,7 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
+    flex-wrap: wrap;
 }
 
 .adjustment-inputs input {
