@@ -143,6 +143,10 @@ function addNewPaper(e) {
     const width = parseInt(document.getElementById('paperWidth').value);
     const height = parseInt(document.getElementById('paperHeight').value);
     const crossSide = document.getElementById('crossSide').value;
+    const leftRight1 = parseFloat(document.getElementById('leftRight1').value) || 0.0;
+    const leftRight2 = parseFloat(document.getElementById('leftRight2').value) || 0.0;
+    const upDown1 = parseFloat(document.getElementById('upDown1').value) || 0.0;
+    const upDown2 = parseFloat(document.getElementById('upDown2').value) || 0.0;
     
     if (!name || !weight || !width || !height || !crossSide) {
         alert('Please fill in all fields');
@@ -167,7 +171,11 @@ function addNewPaper(e) {
         weight,
         width,
         height,
-        crossSide
+        crossSide,
+        crossAdjust: {
+            leftRight: [leftRight1, leftRight2],
+            upDown: [upDown1, upDown2]
+        }
     };
     
     paperTypes.push(newPaper);
@@ -250,6 +258,94 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
+// Modal functionality for editing cross adjustments
+function openAdjustmentModal(name, weight, width, height) {
+    const paper = paperTypes.find(p => 
+        p.name === name && 
+        p.weight === weight && 
+        p.width === width && 
+        p.height === height
+    );
+    
+    if (!paper) return;
+    
+    // Create modal HTML
+    const modalHTML = `
+        <div id="adjustmentModal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Edit Cross Adjustment - ${paper.name}</h3>
+                    <button onclick="closeAdjustmentModal()" class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="adjustment-form">
+                        <div class="adjustment-group">
+                            <label>Left/Right Adjustment:</label>
+                            <div class="adjustment-inputs">
+                                <input type="number" id="modalLeftRight1" value="${paper.crossAdjust.leftRight[0]}" step="0.1">
+                                <span>,</span>
+                                <input type="number" id="modalLeftRight2" value="${paper.crossAdjust.leftRight[1]}" step="0.1">
+                            </div>
+                        </div>
+                        <div class="adjustment-group">
+                            <label>Up/Down Adjustment:</label>
+                            <div class="adjustment-inputs">
+                                <input type="number" id="modalUpDown1" value="${paper.crossAdjust.upDown[0]}" step="0.1">
+                                <span>,</span>
+                                <input type="number" id="modalUpDown2" value="${paper.crossAdjust.upDown[1]}" step="0.1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="closeAdjustmentModal()" class="cancel-btn">Cancel</button>
+                    <button onclick="saveAdjustment('${name}', ${weight}, ${width}, ${height})" class="save-btn">Save Adjustment</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Add modal to body
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    
+    // Focus first input
+    setTimeout(() => {
+        document.getElementById('modalLeftRight1').focus();
+    }, 100);
+}
+
+function closeAdjustmentModal() {
+    const modal = document.getElementById('adjustmentModal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+function saveAdjustment(name, weight, width, height) {
+    const leftRight1 = parseFloat(document.getElementById('modalLeftRight1').value) || 0.0;
+    const leftRight2 = parseFloat(document.getElementById('modalLeftRight2').value) || 0.0;
+    const upDown1 = parseFloat(document.getElementById('modalUpDown1').value) || 0.0;
+    const upDown2 = parseFloat(document.getElementById('modalUpDown2').value) || 0.0;
+    
+    const paperIndex = paperTypes.findIndex(paper => 
+        paper.name === name && 
+        paper.weight === weight && 
+        paper.width === width && 
+        paper.height === height
+    );
+    
+    if (paperIndex !== -1) {
+        paperTypes[paperIndex].crossAdjust = {
+            leftRight: [leftRight1, leftRight2],
+            upDown: [upDown1, upDown2]
+        };
+        filteredPapers = [...paperTypes];
+        renderPaperGrid();
+        closeAdjustmentModal();
+        showNotification('Cross adjustment saved!', 'success');
+    }
+}
+
 // Add some helpful keyboard shortcuts
 document.addEventListener('keydown', function(e) {
     // Ctrl/Cmd + K to focus search
@@ -258,8 +354,12 @@ document.addEventListener('keydown', function(e) {
         searchInput.focus();
     }
     
-    // Escape to clear search
-    if (e.key === 'Escape' && document.activeElement === searchInput) {
-        clearSearchInput();
+    // Escape to clear search or close modal
+    if (e.key === 'Escape') {
+        if (document.activeElement === searchInput) {
+            clearSearchInput();
+        } else {
+            closeAdjustmentModal();
+        }
     }
 });
