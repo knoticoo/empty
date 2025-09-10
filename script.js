@@ -1,21 +1,21 @@
 // Paper types data with your provided examples
 let paperTypes = [
-    { name: "MultiArt Silk", weight: 90, width: 360, height: 315, crossSide: "short" },
-    { name: "G-Print", weight: 100, width: 445, height: 315, crossSide: "short" },
-    { name: "G-Print", weight: 130, width: 320, height: 252, crossSide: "long" },
-    { name: "Arctic Volume White", weight: 130, width: 320, height: 252, crossSide: "long" },
-    { name: "Arctic Volume Ice", weight: 130, width: 320, height: 252, crossSide: "long" },
-    { name: "G-Print", weight: 170, width: 320, height: 252, crossSide: "long" },
-    { name: "Amber Graphic", weight: 140, width: 355, height: 252, crossSide: "short" },
-    { name: "Amber Graphic", weight: 140, width: 355, height: 310, crossSide: "short" },
-    { name: "Munken Premium Cream", weight: 115, width: 355, height: 310, crossSide: "short" },
-    { name: "Munken Pure", weight: 130, width: 355, height: 310, crossSide: "short" },
-    { name: "Amber Graphic", weight: 120, width: 320, height: 252, crossSide: "long" },
-    { name: "Amber Graphic", weight: 100, width: 320, height: 252, crossSide: "long" },
-    { name: "Munken Print Cream", weight: 80, width: 320, height: 252, crossSide: "long" },
-    { name: "Magno Volume", weight: 150, width: 487, height: 320, crossSide: "short" },
-    { name: "Munken Lynx Rough", weight: 150, width: 445, height: 315, crossSide: "short" },
-    { name: "Munken Polar Rough", weight: 120, width: 445, height: 315, crossSide: "short" }
+    { name: "MultiArt Silk", weight: 90, width: 360, height: 315, crossSide: "short", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
+    { name: "G-Print", weight: 100, width: 445, height: 315, crossSide: "short", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
+    { name: "G-Print", weight: 130, width: 320, height: 252, crossSide: "long", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
+    { name: "Arctic Volume White", weight: 130, width: 320, height: 252, crossSide: "long", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
+    { name: "Arctic Volume Ice", weight: 130, width: 320, height: 252, crossSide: "long", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
+    { name: "G-Print", weight: 170, width: 320, height: 252, crossSide: "long", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
+    { name: "Amber Graphic", weight: 140, width: 355, height: 252, crossSide: "short", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
+    { name: "Amber Graphic", weight: 140, width: 355, height: 310, crossSide: "short", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
+    { name: "Munken Premium Cream", weight: 115, width: 355, height: 310, crossSide: "short", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
+    { name: "Munken Pure", weight: 130, width: 355, height: 310, crossSide: "short", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
+    { name: "Amber Graphic", weight: 120, width: 320, height: 252, crossSide: "long", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
+    { name: "Amber Graphic", weight: 100, width: 320, height: 252, crossSide: "long", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
+    { name: "Munken Print Cream", weight: 80, width: 320, height: 252, crossSide: "long", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
+    { name: "Magno Volume", weight: 150, width: 487, height: 320, crossSide: "short", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
+    { name: "Munken Lynx Rough", weight: 150, width: 445, height: 315, crossSide: "short", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } },
+    { name: "Munken Polar Rough", weight: 120, width: 445, height: 315, crossSide: "short", crossAdjust: { leftRight: [0.0, 0.0], upDown: [0.0, 0.0] } }
 ];
 
 let filteredPapers = [...paperTypes];
@@ -75,6 +75,23 @@ function renderPaperGrid() {
                 <div class="cross-side-value">
                     ${paper.crossSide === 'short' ? 'Short Side' : 'Long Side'}
                 </div>
+            </div>
+            <div class="cross-adjustment-display">
+                <div class="adjustment-title">Cross Adjustment:</div>
+                <div class="adjustment-values">
+                    <div class="adjustment-row">
+                        <span class="adjustment-label">Left/Right:</span>
+                        <span class="adjustment-value">${paper.crossAdjust.leftRight[0]}, ${paper.crossAdjust.leftRight[1]}</span>
+                    </div>
+                    <div class="adjustment-row">
+                        <span class="adjustment-label">Up/Down:</span>
+                        <span class="adjustment-value">${paper.crossAdjust.upDown[0]}, ${paper.crossAdjust.upDown[1]}</span>
+                    </div>
+                </div>
+                <button onclick="openAdjustmentModal('${paper.name}', ${paper.weight}, ${paper.width}, ${paper.height})" 
+                        class="edit-adjustment-btn">
+                    Edit Adjustment
+                </button>
             </div>
             <div class="paper-actions" style="margin-top: 15px; display: flex; gap: 10px;">
                 <button onclick="toggleCrossSide('${paper.name}', ${paper.weight}, ${paper.width}, ${paper.height})" 
