@@ -720,6 +720,17 @@ body {
     font-weight: 600;
 }
 
+.constraint-help {
+    background: #e8f5e8;
+    border: 1px solid #4CAF50;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    color: #2e7d32;
+    font-weight: 500;
+}
+
 .adjustment-group {
     display: flex;
     flex-direction: column;
@@ -755,6 +766,23 @@ body {
     outline: none;
     border-color: #667eea;
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Constraint indicator styling */
+.adjustment-inputs input.constrained {
+    background-color: #f8f9fa;
+    border-color: #28a745;
+    position: relative;
+}
+
+.adjustment-inputs input.constrained::after {
+    content: "🔗";
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #28a745;
 }
 
 .adjustment-inputs span {

@@ -47,6 +47,9 @@ function setupEventListeners() {
     
     // Add new paper form
     addPaperForm.addEventListener('submit', addNewPaper);
+    
+    // Setup alignment constraint listeners
+    setupAlignmentConstraints();
 }
 
 function renderPaperGrid() {
@@ -286,6 +289,7 @@ function openAdjustmentModal(name, weight, width, height) {
                     <button onclick="closeAdjustmentModal()" class="close-btn">&times;</button>
                 </div>
                 <div class="modal-body">
+                    <div class="constraint-help">💡 Values are automatically constrained: Left/Right and Up/Down pairs must sum to zero</div>
                     <div class="adjustment-form">
                         <div class="orientation-section">
                             <h4>Short Side Adjustments</h4>
@@ -338,9 +342,12 @@ function openAdjustmentModal(name, weight, width, height) {
     // Add modal to body
     document.body.insertAdjacentHTML('beforeend', modalHTML);
     
+    // Setup constraint listeners for modal inputs
+    setupModalAlignmentConstraints();
+    
     // Focus first input
     setTimeout(() => {
-        document.getElementById('modalLeftRight1').focus();
+        document.getElementById('modalShortLeftRight1').focus();
     }, 100);
 }
 
@@ -384,6 +391,76 @@ function saveAdjustment(name, weight, width, height) {
         renderPaperGrid();
         closeAdjustmentModal();
         showNotification('Cross adjustments saved!', 'success');
+    }
+}
+
+// Alignment constraint system
+function setupAlignmentConstraints() {
+    // Add constraint listeners to form inputs
+    const leftRight1 = document.getElementById('leftRight1');
+    const leftRight2 = document.getElementById('leftRight2');
+    const upDown1 = document.getElementById('upDown1');
+    const upDown2 = document.getElementById('upDown2');
+    
+    if (leftRight1 && leftRight2) {
+        leftRight1.addEventListener('input', () => updateOppositeValue(leftRight1, leftRight2));
+        leftRight2.addEventListener('input', () => updateOppositeValue(leftRight2, leftRight1));
+    }
+    
+    if (upDown1 && upDown2) {
+        upDown1.addEventListener('input', () => updateOppositeValue(upDown1, upDown2));
+        upDown2.addEventListener('input', () => updateOppositeValue(upDown2, upDown1));
+    }
+}
+
+function updateOppositeValue(changedInput, oppositeInput) {
+    const value = parseFloat(changedInput.value) || 0;
+    const oppositeValue = -value;
+    oppositeInput.value = oppositeValue.toFixed(1);
+    
+    // Add visual constraint indicators
+    changedInput.classList.add('constrained');
+    oppositeInput.classList.add('constrained');
+    
+    // Remove indicators after a short delay to show the constraint was applied
+    setTimeout(() => {
+        changedInput.classList.remove('constrained');
+        oppositeInput.classList.remove('constrained');
+    }, 1000);
+}
+
+function setupModalAlignmentConstraints() {
+    // Add constraint listeners to modal inputs
+    const modalShortLeftRight1 = document.getElementById('modalShortLeftRight1');
+    const modalShortLeftRight2 = document.getElementById('modalShortLeftRight2');
+    const modalShortUpDown1 = document.getElementById('modalShortUpDown1');
+    const modalShortUpDown2 = document.getElementById('modalShortUpDown2');
+    
+    const modalLongLeftRight1 = document.getElementById('modalLongLeftRight1');
+    const modalLongLeftRight2 = document.getElementById('modalLongLeftRight2');
+    const modalLongUpDown1 = document.getElementById('modalLongUpDown1');
+    const modalLongUpDown2 = document.getElementById('modalLongUpDown2');
+    
+    // Short side constraints
+    if (modalShortLeftRight1 && modalShortLeftRight2) {
+        modalShortLeftRight1.addEventListener('input', () => updateOppositeValue(modalShortLeftRight1, modalShortLeftRight2));
+        modalShortLeftRight2.addEventListener('input', () => updateOppositeValue(modalShortLeftRight2, modalShortLeftRight1));
+    }
+    
+    if (modalShortUpDown1 && modalShortUpDown2) {
+        modalShortUpDown1.addEventListener('input', () => updateOppositeValue(modalShortUpDown1, modalShortUpDown2));
+        modalShortUpDown2.addEventListener('input', () => updateOppositeValue(modalShortUpDown2, modalShortUpDown1));
+    }
+    
+    // Long side constraints
+    if (modalLongLeftRight1 && modalLongLeftRight2) {
+        modalLongLeftRight1.addEventListener('input', () => updateOppositeValue(modalLongLeftRight1, modalLongLeftRight2));
+        modalLongLeftRight2.addEventListener('input', () => updateOppositeValue(modalLongLeftRight2, modalLongLeftRight1));
+    }
+    
+    if (modalLongUpDown1 && modalLongUpDown2) {
+        modalLongUpDown1.addEventListener('input', () => updateOppositeValue(modalLongUpDown1, modalLongUpDown2));
+        modalLongUpDown2.addEventListener('input', () => updateOppositeValue(modalLongUpDown2, modalLongUpDown1));
     }
 }
 
