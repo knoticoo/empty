@@ -51,8 +51,35 @@
             </div>
         </div>
 
-        <div class="paper-grid" id="paperGrid">
-            <!-- Paper cards will be dynamically generated here -->
+        <div class="content-container">
+            <!-- Categories view -->
+            <div id="categoriesView" class="view-container">
+                <div class="categories-grid" id="categoriesGrid">
+                    <!-- Category cards will be dynamically generated here -->
+                </div>
+            </div>
+
+            <!-- Papers view -->
+            <div id="papersView" class="view-container" style="display: none;">
+                <div class="papers-header">
+                    <button id="backToCategories" class="back-btn">← Atpakaļ uz kategorijām</button>
+                    <h2 id="currentCategoryName">Kategorija</h2>
+                </div>
+                <div class="paper-grid" id="paperGrid">
+                    <!-- Paper cards will be dynamically generated here -->
+                </div>
+            </div>
+
+            <!-- Paper history view -->
+            <div id="historyView" class="view-container" style="display: none;">
+                <div class="history-header">
+                    <button id="backToPapers" class="back-btn">← Atpakaļ uz papīriem</button>
+                    <h2 id="currentPaperName">Papīra vēsture</h2>
+                </div>
+                <div class="history-container" id="historyContainer">
+                    <!-- History entries will be dynamically generated here -->
+                </div>
+            </div>
         </div>
 
         <div class="add-paper-section">

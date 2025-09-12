@@ -1,6 +1,10 @@
-// Paper types data - loaded from database
+// Application state
 let paperTypes = [];
 let filteredPapers = [];
+let categories = [];
+let currentView = 'categories'; // 'categories', 'papers', 'history'
+let currentCategory = null;
+let currentPaper = null;
 
 // DOM elements
 const paperGrid = document.getElementById('paperGrid');
@@ -10,7 +14,34 @@ const weightFilter = document.getElementById('weightFilter');
 const sizeFilter = document.getElementById('sizeFilter');
 const addPaperForm = document.getElementById('addPaperForm');
 
+// View elements
+const categoriesView = document.getElementById('categoriesView');
+const papersView = document.getElementById('papersView');
+const historyView = document.getElementById('historyView');
+const categoriesGrid = document.getElementById('categoriesGrid');
+const backToCategories = document.getElementById('backToCategories');
+const backToPapers = document.getElementById('backToPapers');
+const currentCategoryName = document.getElementById('currentCategoryName');
+const currentPaperName = document.getElementById('currentPaperName');
+const historyContainer = document.getElementById('historyContainer');
+
 // API Functions
+async function loadCategories() {
+    try {
+        const response = await fetch('/api/categories');
+        if (!response.ok) {
+            throw new Error('Failed to load categories');
+        }
+        categories = await response.json();
+        renderCategoriesGrid();
+    } catch (error) {
+        console.error('Error loading categories:', error);
+        showNotification('Neizdevās ielādēt kategorijas. Izmanto bezsaistes režīmu.', 'info');
+        categories = [];
+        renderCategoriesGrid();
+    }
+}
+
 async function loadPaperTypes() {
     try {
         const response = await fetch('/api/papers');
@@ -27,6 +58,36 @@ async function loadPaperTypes() {
         paperTypes = [];
         filteredPapers = [];
         renderPaperGrid();
+    }
+}
+
+async function loadPapersByCategory(categoryName) {
+    try {
+        const response = await fetch(`/api/categories/${encodeURIComponent(categoryName)}/papers`);
+        if (!response.ok) {
+            throw new Error('Failed to load papers for category');
+        }
+        const papers = await response.json();
+        return papers;
+    } catch (error) {
+        console.error('Error loading papers for category:', error);
+        showNotification('Neizdevās ielādēt papīrus kategorijai', 'error');
+        return [];
+    }
+}
+
+async function loadPaperHistory(paperId) {
+    try {
+        const response = await fetch(`/api/papers/${paperId}/history`);
+        if (!response.ok) {
+            throw new Error('Failed to load paper history');
+        }
+        const history = await response.json();
+        return history;
+    } catch (error) {
+        console.error('Error loading paper history:', error);
+        showNotification('Neizdevās ielādēt papīra vēsturi', 'error');
+        return [];
     }
 }
 
@@ -139,7 +200,7 @@ async function deletePaperType(id) {
 
 // Initialize the app
 document.addEventListener('DOMContentLoaded', function() {
-    loadPaperTypes();
+    loadCategories();
     setupEventListeners();
     registerServiceWorker();
     setupPWAFeatures();
@@ -156,6 +217,10 @@ function setupEventListeners() {
     
     // Add new paper form
     addPaperForm.addEventListener('submit', addNewPaper);
+    
+    // Navigation buttons
+    backToCategories.addEventListener('click', showCategoriesView);
+    backToPapers.addEventListener('click', showPapersView);
     
     // Setup alignment constraint listeners
     setupAlignmentConstraints();
@@ -220,7 +285,11 @@ function renderPaperGrid() {
                     Rediģēt regulējumus
                 </button>
             </div>
-            <div class="paper-actions" style="margin-top: 15px; display: flex; gap: 10px;">
+            <div class="paper-actions" style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+                <button onclick="openPaperHistory(${paper.id})" 
+                        class="history-btn" style="flex: 1; padding: 8px 12px; border: 2px solid #9b59b6; background: white; color: #9b59b6; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.2s ease;">
+                    📊 Vēsture
+                </button>
                 <button onclick="toggleCrossSide(${paper.id})" 
                         class="toggle-btn" style="flex: 1; padding: 8px 12px; border: 2px solid #667eea; background: white; color: #667eea; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.2s ease;">
                     Pārslēgt uz ${paper.crossSide === 'short' ? 'Garā puse' : 'Īsā puse'}
@@ -233,6 +302,127 @@ function renderPaperGrid() {
                         class="remove-btn" style="padding: 8px 12px; border: 2px solid #e74c3c; background: white; color: #e74c3c; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.2s ease;">
                     Dzēst
                 </button>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Navigation functions
+function showCategoriesView() {
+    currentView = 'categories';
+    categoriesView.style.display = 'block';
+    papersView.style.display = 'none';
+    historyView.style.display = 'none';
+    loadCategories();
+}
+
+function showPapersView() {
+    currentView = 'papers';
+    categoriesView.style.display = 'none';
+    papersView.style.display = 'block';
+    historyView.style.display = 'none';
+}
+
+function showHistoryView() {
+    currentView = 'history';
+    categoriesView.style.display = 'none';
+    papersView.style.display = 'none';
+    historyView.style.display = 'block';
+}
+
+// Rendering functions
+function renderCategoriesGrid() {
+    if (categories.length === 0) {
+        categoriesGrid.innerHTML = '<div class="no-results">Nav atrastas kategorijas.</div>';
+        return;
+    }
+    
+    categoriesGrid.innerHTML = categories.map(category => `
+        <div class="category-card" onclick="openCategory('${category.name}')">
+            <div class="category-name">${category.name}</div>
+            <div class="category-count">${category.paperCount} papīra veidi</div>
+            <div class="category-preview">
+                ${category.papers.slice(0, 3).map(paper => 
+                    `<span class="paper-preview">${paper.weight}gr ${paper.width}×${paper.height}mm</span>`
+                ).join('')}
+                ${category.papers.length > 3 ? `<span class="more-papers">+${category.papers.length - 3} vēl</span>` : ''}
+            </div>
+        </div>
+    `).join('');
+}
+
+async function openCategory(categoryName) {
+    currentCategory = categoryName;
+    currentCategoryName.textContent = categoryName;
+    
+    const papers = await loadPapersByCategory(categoryName);
+    filteredPapers = papers;
+    showPapersView();
+    renderPaperGrid();
+}
+
+async function openPaperHistory(paperId) {
+    const paper = filteredPapers.find(p => p.id === paperId);
+    if (!paper) return;
+    
+    currentPaper = paper;
+    currentPaperName.textContent = `${paper.name} - ${paper.weight}gr ${paper.width}×${paper.height}mm`;
+    
+    const history = await loadPaperHistory(paperId);
+    renderPaperHistory(history);
+    showHistoryView();
+}
+
+function renderPaperHistory(history) {
+    if (history.length === 0) {
+        historyContainer.innerHTML = '<div class="no-results">Nav vēstures ierakstu šim papīram.</div>';
+        return;
+    }
+    
+    historyContainer.innerHTML = history.map(entry => `
+        <div class="history-entry">
+            <div class="history-header">
+                <div class="history-date">${new Date(entry.changedAt).toLocaleString('lv-LV')}</div>
+            </div>
+            <div class="history-changes">
+                <div class="change-section">
+                    <h4>Īsās puses regulējumi</h4>
+                    <div class="change-row">
+                        <span class="change-label">Kreisā/Labā:</span>
+                        <span class="change-values">
+                            <span class="old-value">${entry.oldValues.short.leftRight[0]}, ${entry.oldValues.short.leftRight[1]}</span>
+                            <span class="arrow">→</span>
+                            <span class="new-value">${entry.newValues.short.leftRight[0]}, ${entry.newValues.short.leftRight[1]}</span>
+                        </span>
+                    </div>
+                    <div class="change-row">
+                        <span class="change-label">Augšā/Lejā:</span>
+                        <span class="change-values">
+                            <span class="old-value">${entry.oldValues.short.upDown[0]}, ${entry.oldValues.short.upDown[1]}</span>
+                            <span class="arrow">→</span>
+                            <span class="new-value">${entry.newValues.short.upDown[0]}, ${entry.newValues.short.upDown[1]}</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="change-section">
+                    <h4>Garās puses regulējumi</h4>
+                    <div class="change-row">
+                        <span class="change-label">Kreisā/Labā:</span>
+                        <span class="change-values">
+                            <span class="old-value">${entry.oldValues.long.leftRight[0]}, ${entry.oldValues.long.leftRight[1]}</span>
+                            <span class="arrow">→</span>
+                            <span class="new-value">${entry.newValues.long.leftRight[0]}, ${entry.newValues.long.leftRight[1]}</span>
+                        </span>
+                    </div>
+                    <div class="change-row">
+                        <span class="change-label">Augšā/Lejā:</span>
+                        <span class="change-values">
+                            <span class="old-value">${entry.oldValues.long.upDown[0]}, ${entry.oldValues.long.upDown[1]}</span>
+                            <span class="arrow">→</span>
+                            <span class="new-value">${entry.newValues.long.upDown[0]}, ${entry.newValues.long.upDown[1]}</span>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     `).join('');
@@ -323,12 +513,14 @@ async function addNewPaper(e) {
         return;
     }
     
-    // Check for duplicates with enhanced validation
+    // Check for duplicates with enhanced validation (all parameters)
     const duplicatePapers = paperTypes.filter(paper => 
         paper.name.toLowerCase() === name.toLowerCase() && 
         paper.weight === weight && 
         paper.width === width && 
-        paper.height === height
+        paper.height === height &&
+        paper.crossSide === crossSide &&
+        paper.coating === coating
     );
     
     if (duplicatePapers.length > 0) {
@@ -360,8 +552,8 @@ async function addNewPaper(e) {
     try {
         await savePaperType(newPaper);
         
-        // Reload paper types from database
-        await loadPaperTypes();
+        // Reload categories from database
+        await loadCategories();
         
         // Clear form
         addPaperForm.reset();
@@ -382,8 +574,8 @@ async function toggleCrossSide(id) {
     try {
         await toggleCrossSideAPI(id, newCrossSide);
         
-        // Reload paper types from database
-        await loadPaperTypes();
+        // Reload categories from database
+        await loadCategories();
         
         showNotification('Šķērsa puse atjaunota!', 'success');
     } catch (error) {
@@ -550,8 +742,8 @@ async function saveAdjustment(id) {
     try {
         await updateCrossAdjustments(id, crossAdjust);
         
-        // Reload paper types from database
-        await loadPaperTypes();
+        // Reload categories from database
+        await loadCategories();
         
         closeAdjustmentModal();
         showNotification('Šķērsa regulējumi saglabāti!', 'success');
@@ -994,8 +1186,8 @@ async function saveEditPaper(id) {
     try {
         await updatePaperType(id, updatedPaper);
         
-        // Reload paper types from database
-        await loadPaperTypes();
+        // Reload categories from database
+        await loadCategories();
         
         closeEditPaperModal();
         showNotification('Papīrs veiksmīgi atjaunots!', 'success');

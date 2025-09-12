@@ -391,27 +391,67 @@ app.patch('/api/papers/:id/adjustments', (req, res) => {
     const { id } = req.params;
     const { crossAdjust } = req.body;
     
-    const stmt = db.prepare(`UPDATE paper_types SET 
-        shortLeftRight1 = ?, shortLeftRight2 = ?, shortUpDown1 = ?, shortUpDown2 = ?,
-        longLeftRight1 = ?, longLeftRight2 = ?, longUpDown1 = ?, longUpDown2 = ?,
-        updated_at = CURRENT_TIMESTAMP
-        WHERE id = ?`);
-    
-    stmt.run([
-        crossAdjust.short.leftRight[0], crossAdjust.short.leftRight[1],
-        crossAdjust.short.upDown[0], crossAdjust.short.upDown[1],
-        crossAdjust.long.leftRight[0], crossAdjust.long.leftRight[1],
-        crossAdjust.long.upDown[0], crossAdjust.long.upDown[1],
-        id
-    ], function(err) {
+    // First get the current values to store in history
+    db.get(`SELECT shortLeftRight1, shortLeftRight2, shortUpDown1, shortUpDown2, 
+                   longLeftRight1, longLeftRight2, longUpDown1, longUpDown2 
+            FROM paper_types WHERE id = ?`, [id], (err, currentRow) => {
         if (err) {
-            res.status(400).json({ error: err.message });
+            res.status(500).json({ error: err.message });
             return;
         }
-        res.json({ message: 'Cross adjustments updated successfully' });
+        
+        if (!currentRow) {
+            res.status(404).json({ error: 'Paper not found' });
+            return;
+        }
+        
+        // Store history before updating
+        const historyStmt = db.prepare(`INSERT INTO alignment_history 
+            (paper_id, old_short_left_right1, old_short_left_right2, old_short_up_down1, old_short_up_down2,
+             old_long_left_right1, old_long_left_right2, old_long_up_down1, old_long_up_down2,
+             new_short_left_right1, new_short_left_right2, new_short_up_down1, new_short_up_down2,
+             new_long_left_right1, new_long_left_right2, new_long_up_down1, new_long_up_down2)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
+        
+        historyStmt.run([
+            id,
+            currentRow.shortLeftRight1, currentRow.shortLeftRight2, currentRow.shortUpDown1, currentRow.shortUpDown2,
+            currentRow.longLeftRight1, currentRow.longLeftRight2, currentRow.longUpDown1, currentRow.longUpDown2,
+            crossAdjust.short.leftRight[0], crossAdjust.short.leftRight[1],
+            crossAdjust.short.upDown[0], crossAdjust.short.upDown[1],
+            crossAdjust.long.leftRight[0], crossAdjust.long.leftRight[1],
+            crossAdjust.long.upDown[0], crossAdjust.long.upDown[1]
+        ], function(historyErr) {
+            if (historyErr) {
+                console.error('Error storing history:', historyErr.message);
+            }
+            
+            // Now update the paper
+            const updateStmt = db.prepare(`UPDATE paper_types SET 
+                shortLeftRight1 = ?, shortLeftRight2 = ?, shortUpDown1 = ?, shortUpDown2 = ?,
+                longLeftRight1 = ?, longLeftRight2 = ?, longUpDown1 = ?, longUpDown2 = ?,
+                updated_at = CURRENT_TIMESTAMP
+                WHERE id = ?`);
+            
+            updateStmt.run([
+                crossAdjust.short.leftRight[0], crossAdjust.short.leftRight[1],
+                crossAdjust.short.upDown[0], crossAdjust.short.upDown[1],
+                crossAdjust.long.leftRight[0], crossAdjust.long.leftRight[1],
+                crossAdjust.long.upDown[0], crossAdjust.long.upDown[1],
+                id
+            ], function(updateErr) {
+                if (updateErr) {
+                    res.status(400).json({ error: updateErr.message });
+                    return;
+                }
+                res.json({ message: 'Cross adjustments updated successfully' });
+            });
+            
+            updateStmt.finalize();
+        });
+        
+        historyStmt.finalize();
     });
-    
-    stmt.finalize();
 });
 
 // Toggle cross side
