@@ -313,6 +313,13 @@ function showCategoriesView() {
     categoriesView.style.display = 'block';
     papersView.style.display = 'none';
     historyView.style.display = 'none';
+    
+    // Show add paper section in categories view
+    const addPaperSection = document.querySelector('.add-paper-section');
+    if (addPaperSection) {
+        addPaperSection.style.display = 'block';
+    }
+    
     loadCategories();
 }
 
@@ -321,6 +328,12 @@ function showPapersView() {
     categoriesView.style.display = 'none';
     papersView.style.display = 'block';
     historyView.style.display = 'none';
+    
+    // Show add paper section in papers view
+    const addPaperSection = document.querySelector('.add-paper-section');
+    if (addPaperSection) {
+        addPaperSection.style.display = 'block';
+    }
 }
 
 function showHistoryView() {
@@ -328,6 +341,12 @@ function showHistoryView() {
     categoriesView.style.display = 'none';
     papersView.style.display = 'none';
     historyView.style.display = 'block';
+    
+    // Hide add paper section in history view
+    const addPaperSection = document.querySelector('.add-paper-section');
+    if (addPaperSection) {
+        addPaperSection.style.display = 'none';
+    }
 }
 
 // Rendering functions
@@ -357,6 +376,8 @@ async function openCategory(categoryName) {
     
     const papers = await loadPapersByCategory(categoryName);
     filteredPapers = papers;
+    // Also update paperTypes to ensure edit functionality works
+    paperTypes = papers;
     showPapersView();
     renderPaperGrid();
 }
@@ -577,6 +598,14 @@ async function toggleCrossSide(id) {
         // Reload categories from database
         await loadCategories();
         
+        // If we're in category view, reload the current category's papers
+        if (currentView === 'papers' && currentCategory) {
+            const papers = await loadPapersByCategory(currentCategory);
+            filteredPapers = papers;
+            paperTypes = papers;
+            renderPaperGrid();
+        }
+        
         showNotification('Šķērsa puse atjaunota!', 'success');
     } catch (error) {
         showNotification('Neizdevās atjaunot šķērsa pusi: ' + error.message, 'error');
@@ -590,6 +619,14 @@ async function removePaper(id) {
             
             // Reload paper types from database
             await loadPaperTypes();
+            
+            // If we're in category view, reload the current category's papers
+            if (currentView === 'papers' && currentCategory) {
+                const papers = await loadPapersByCategory(currentCategory);
+                filteredPapers = papers;
+                paperTypes = papers;
+                renderPaperGrid();
+            }
             
             showNotification('Papīra veids dzēsts!', 'success');
         } catch (error) {
@@ -744,6 +781,14 @@ async function saveAdjustment(id) {
         
         // Reload categories from database
         await loadCategories();
+        
+        // If we're in category view, reload the current category's papers
+        if (currentView === 'papers' && currentCategory) {
+            const papers = await loadPapersByCategory(currentCategory);
+            filteredPapers = papers;
+            paperTypes = papers;
+            renderPaperGrid();
+        }
         
         closeAdjustmentModal();
         showNotification('Šķērsa regulējumi saglabāti!', 'success');
@@ -1188,6 +1233,14 @@ async function saveEditPaper(id) {
         
         // Reload categories from database
         await loadCategories();
+        
+        // If we're in category view, reload the current category's papers
+        if (currentView === 'papers' && currentCategory) {
+            const papers = await loadPapersByCategory(currentCategory);
+            filteredPapers = papers;
+            paperTypes = papers;
+            renderPaperGrid();
+        }
         
         closeEditPaperModal();
         showNotification('Papīrs veiksmīgi atjaunots!', 'success');
